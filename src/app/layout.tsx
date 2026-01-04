@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ikako | Software Engineer",
   description: "Software engineer from Tbilisi, Georgia. Currently based in UK, London.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
