@@ -41,13 +41,6 @@ export default function HomePage() {
       </div>
 
       <div className="space-y-11 lg:max-w-xl">
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_0ms_both] rounded-md border bg-secondary px-4 py-2">
-          <span className="inline-flex animate-[background-shine_2s_linear_infinite] bg-[linear-gradient(110deg,hsl(var(--foreground)),45%,hsl(var(--primary)),55%,hsl(var(--foreground)))] bg-[length:200%_100%] bg-clip-text text-sm font-bold text-transparent">
-            👋 Hello there! I&apos;m Ikako, software engineer from Tbilisi,
-            Georgia. Currently based in UK, London.
-          </span>
-        </section>
-
         <div className="flex justify-center lg:hidden">
           <BowlLoader />
         </div>
@@ -56,12 +49,14 @@ export default function HomePage() {
           <h3 className="w-fit border-b pb-2 font-semibold">What I do</h3>
 
           <p className="text-sm text-muted-foreground">
-            As an engineer, I love crafting smooth and user-friendly digital
-            experiences, optimize server-side logic, and design efficient APIs
-            that power the web. Thanks to my knack for TypeScript, I can keep the
-            code clean and easy to work with, making those big projects a whole
-            lot simpler to manage. When I&apos;m not coding, I&apos;m usually
-            exploring new tech or fine-tuning my engineering skills.
+            Full-stack engineer who loves building products from the ground up.
+            I work mostly with TypeScript, React, and Next.js on the frontend,
+            and Go for backend services. Particularly drawn to decentralized and
+            distributed systems - P2P networks, service meshes, and anything
+            that scales horizontally. Also fascinated by lower-level stuff,
+            memory management, hardware, and systems programming with Rust. I
+            enjoy the whole spectrum, from polished UIs to bare-metal
+            performance.
           </p>
         </section>
 
@@ -75,12 +70,14 @@ export default function HomePage() {
             Building
             {" "}
             <span className="font-medium text-foreground">Tally</span>
-            , a modern accounting &amp; invoicing platform with AI-powered
-            invoice creation, multi-tenant architecture, and a cross-platform
-            desktop app built with Tauri. Also working on my capstone project
+            ,
+            a modern accounting &amp; invoicing platform with AI-powered invoice
+            creation, multi-tenant architecture, and a cross-platform desktop
+            app built with Tauri. Also working on my capstone project
             {" "}
             <span className="font-medium text-foreground">t-mesh</span>
-            , a distributed P2P translation service mesh in Go featuring a CLI
+            , a
+            distributed P2P translation service mesh in Go featuring a CLI
             orchestrator, PostgreSQL backend, and intelligent worker selection.
             Final year at University of Essex, graduating 2026.
           </p>
@@ -138,8 +135,8 @@ export default function HomePage() {
 
         <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
           <p className="text-sm text-muted-foreground">
-            If you like what I do and want to collaborate, feel free to reach out
-            via social links in the navigation below.
+            If you like what I do and want to collaborate, feel free to reach
+            out via social links in the navigation below.
           </p>
         </section>
       </div>
