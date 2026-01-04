@@ -49,22 +49,18 @@ const projects: Project[] = [
 ];
 
 function StatusIndicator({ status }: { status: Project["status"] }) {
-  const colors = {
-    development: "bg-yellow-400",
-    live: "bg-green-400",
-    archived: "bg-gray-400",
+  const config = {
+    development: { color: "bg-yellow-400", label: "In Development" },
+    live: { color: "bg-green-400", label: "Live" },
+    archived: { color: "bg-gray-400 animate-none", label: "Archived" },
   };
 
-  const labels = {
-    development: "In Development",
-    live: "Live",
-    archived: "Archived",
-  };
+  const { color, label } = config[status];
 
   return (
     <div className="flex items-center gap-2">
-      <div className={`size-2 animate-pulse rounded-full ${colors[status]}`} />
-      <span className="text-xs text-muted-foreground">{labels[status]}</span>
+      <span className={`size-2 animate-pulse rounded-full ${color}`} aria-hidden="true" />
+      <span className="text-xs text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -72,7 +68,7 @@ function StatusIndicator({ status }: { status: Project["status"] }) {
 export default function ProjectsPage() {
   return (
     <div className="space-y-8">
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_0ms_both] space-y-4">
+      <section className="animate-in animate-in-1 space-y-4">
         <h2 className="text-2xl font-bold">Projects</h2>
         <p className="text-sm text-muted-foreground">
           A collection of projects I&apos;ve been working on.
@@ -83,7 +79,7 @@ export default function ProjectsPage() {
         {projects.map((project, index) => (
           <article
             key={project.name}
-            className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_both]"
+            className="animate-in"
             style={{ animationDelay: `${(index + 1) * 100}ms` }}
           >
             <Card>

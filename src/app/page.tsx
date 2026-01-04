@@ -35,7 +35,7 @@ const timelineEvents: TimelineEvent[] = [
 export default function HomePage() {
   return (
     <article className="space-y-11">
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_100ms_both] space-y-4">
+      <section className="animate-in animate-in-2 space-y-4">
         <h2 className="w-fit border-b pb-2 font-semibold">What I do</h2>
 
         <p className="text-sm text-muted-foreground">
@@ -49,7 +49,7 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_200ms_both] space-y-4">
+      <section className="animate-in animate-in-3 space-y-4">
         <div className="flex w-max items-center gap-2 border-b pb-2">
           <span className="size-2 animate-pulse rounded-full bg-green-400" aria-hidden="true" />
           <h2 className="w-fit font-semibold">Currently</h2>
@@ -59,20 +59,18 @@ export default function HomePage() {
           Building
           {" "}
           <span className="font-medium text-foreground">Tally</span>
-          , a
-          modern accounting &amp; invoicing platform with AI-powered invoice
+          , a modern accounting & invoicing platform with AI-powered invoice
           creation, multi-tenant architecture, and a cross-platform desktop app
           built with Tauri. Also working on my capstone project
           {" "}
           <span className="font-medium text-foreground">t-mesh</span>
-          , a
-          distributed P2P translation service mesh in Go featuring a CLI
+          , a distributed P2P translation service mesh in Go featuring a CLI
           orchestrator, PostgreSQL backend, and intelligent worker selection.
           Final year at University of Essex, graduating 2026.
         </p>
       </section>
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_300ms_both] space-y-4" aria-labelledby="bio-heading">
+      <section className="animate-in animate-in-4 space-y-4" aria-labelledby="bio-heading">
         <h2 id="bio-heading" className="w-fit border-b pb-2 font-semibold">Bio</h2>
 
         <div className="relative" aria-label="Timeline">
@@ -103,7 +101,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_400ms_both] space-y-4" aria-labelledby="interests-heading">
+      <section className="animate-in animate-in-5 space-y-4" aria-labelledby="interests-heading">
         <h2 id="interests-heading" className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
           <span>I</span>
           <Heart className="size-4 fill-pink-500 text-pink-500" aria-label="love" />
@@ -119,9 +117,9 @@ export default function HomePage() {
         </p>
       </section>
 
-      <Separator className="my-12 animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_500ms_both]" />
+      <Separator className="animate-in animate-in-6 my-12" />
 
-      <aside className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
+      <aside className="animate-in animate-in-7 space-y-4">
         <p className="text-sm text-muted-foreground">
           If you like what I do and want to collaborate, feel free to reach out
           via social links in the navigation below.
