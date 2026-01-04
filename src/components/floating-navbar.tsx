@@ -1,13 +1,13 @@
 "use client";
 
 import {
+  Code2,
   FlaskConical,
-  FolderKanban,
   Github,
-  Home,
   Linkedin,
   MoreHorizontal,
   Twitter,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -91,12 +91,10 @@ export function FloatingNavbar() {
                 className="inline-flex size-9 items-center justify-center text-muted-foreground transition-colors duration-100 focus-visible:outline-2"
               >
                 {tab.label === "Home" && (
-                  <Home className={cn("size-4", isActive && "text-primary")} />
+                  <User className={cn("size-4", isActive && "text-primary")} />
                 )}
                 {tab.label === "Projects" && (
-                  <FolderKanban
-                    className={cn("size-4", isActive && "text-primary")}
-                  />
+                  <Code2 className={cn("size-4", isActive && "text-primary")} />
                 )}
                 {tab.label === "Lab" && (
                   <FlaskConical className="size-4 text-emerald-500" />
