@@ -72,10 +72,17 @@ export default function HomePage() {
           </div>
 
           <p className="text-sm text-muted-foreground">
-            I&apos;m trying to level-up my dev skills by expanding my knowledge
-            arsenal, mainly learning golang and rust, working on several projects
-            at work while attending university. I&apos;m also in search of good
-            open source projects to contribute to.
+            Building
+            {" "}
+            <span className="font-medium text-foreground">Tally</span>
+            , a modern accounting &amp; invoicing platform with AI-powered
+            invoice creation, multi-tenant architecture, and a cross-platform
+            desktop app built with Tauri. Also working on my capstone project
+            {" "}
+            <span className="font-medium text-foreground">t-mesh</span>
+            , a distributed P2P translation service mesh in Go featuring a CLI
+            orchestrator, PostgreSQL backend, and intelligent worker selection.
+            Final year at University of Essex, graduating 2026.
           </p>
         </section>
 
