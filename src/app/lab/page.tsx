@@ -1,0 +1,18 @@
+import { FlaskConical } from "lucide-react";
+
+export default function LabPage() {
+  return (
+    <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-4">
+      <div className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_0ms_both]">
+        <FlaskConical className="size-16 text-emerald-500" />
+      </div>
+
+      <div className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_100ms_both] space-y-2 text-center">
+        <h1 className="text-2xl font-bold">Lab</h1>
+        <p className="text-sm text-muted-foreground">
+          Experiments and components coming soon.
+        </p>
+      </div>
+    </div>
+  );
+}
