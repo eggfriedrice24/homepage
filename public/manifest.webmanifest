@@ -1,0 +1,21 @@
+{
+  "name": "Ikako | Software Engineer",
+  "short_name": "Ikako",
+  "description": "Software engineer from Tbilisi, Georgia. Currently based in UK, London.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1f0ee",
+  "theme_color": "#d4a51c",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,7 +1,18 @@
+import type { Metadata } from "next";
+
 import { ExternalLink } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "A collection of projects I've been working on. Full-stack applications, open source contributions, and experiments.",
+  openGraph: {
+    title: "Projects | Ikako",
+    description: "A collection of projects I've been working on. Full-stack applications, open source contributions, and experiments.",
+  },
+};
 
 type Project = {
   name: string;

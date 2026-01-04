@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
+
 import { FlaskConical } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Lab",
+  description: "Experiments, component explorations, and creative coding projects.",
+  openGraph: {
+    title: "Lab | Ikako",
+    description: "Experiments, component explorations, and creative coding projects.",
+  },
+};
 
 export default function LabPage() {
   return (
