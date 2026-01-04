@@ -1,7 +1,9 @@
 import { Heart } from "lucide-react";
+import Image from "next/image";
 
 import { Separator } from "@/components/ui/separator";
-import { timelineEvents } from "@/data/timeline";
+
+import { TimelineCarousel } from "./_components/timeline-carousel";
 
 export default function HomePage() {
   return (
@@ -22,60 +24,65 @@ export default function HomePage() {
 
       <section className="animate-in animate-in-3 space-y-4">
         <div className="flex w-max items-center gap-2 border-b pb-2">
-          <span className="size-2 animate-pulse rounded-full bg-green-400" aria-hidden="true" />
+          <span
+            className="size-2 animate-pulse rounded-full bg-green-400"
+            aria-hidden="true"
+          />
           <h2 className="w-fit font-semibold">Currently</h2>
         </div>
 
         <p className="text-sm text-muted-foreground">
-          Building
+          Working full-time at
+          {" "}
+          <span className="font-medium text-sky-400">Noxtton</span>
+          . On the
+          side, building
           {" "}
           <span className="font-medium text-foreground">Tally</span>
+          {" "}
+          under
+          {" "}
+          <Image
+            src="/fluxx-logo-light.svg"
+            alt="Fluxx"
+            width={48}
+            height={12}
+            className="inline-block dark:hidden"
+          />
+          <Image
+            src="/fluxx-logo-dark.svg"
+            alt="Fluxx"
+            width={48}
+            height={12}
+            className="hidden dark:inline-block"
+          />
           , a modern accounting & invoicing platform with AI-powered invoice
           creation, multi-tenant architecture, and a cross-platform desktop app
           built with Tauri. Also working on my capstone project
           {" "}
           <span className="font-medium text-foreground">t-mesh</span>
-          , a decentralized P2P translation service mesh in Go using libp2p,
+          , a
+          decentralized P2P translation service mesh in Go using libp2p,
           featuring CLI-based job orchestration and AI-powered worker selection.
           Final year at University of Essex, graduating 2026.
         </p>
       </section>
 
-      <section className="animate-in animate-in-4 space-y-4" aria-labelledby="bio-heading">
-        <h2 id="bio-heading" className="w-fit border-b pb-2 font-semibold">Bio</h2>
+      <TimelineCarousel />
 
-        <div className="relative" aria-label="Timeline">
-          <div
-            className="absolute left-16 top-0 h-full w-0.5 bg-border"
-            role="presentation"
-          />
-
-          <ol className="relative list-none p-0">
-            {timelineEvents.map(event => (
-              <li
-                key={event.year}
-                className="relative mb-2 flex items-start gap-8 last:mb-0"
-              >
-                <time
-                  dateTime={event.year}
-                  className="w-12 text-right font-bold text-foreground"
-                >
-                  {event.year}
-                </time>
-
-                <p className="flex-1 pt-[2px] text-sm text-muted-foreground">
-                  {event.content}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="animate-in animate-in-5 space-y-4" aria-labelledby="interests-heading">
-        <h2 id="interests-heading" className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
+      <section
+        className="animate-in animate-in-5 space-y-4"
+        aria-labelledby="interests-heading"
+      >
+        <h2
+          id="interests-heading"
+          className="flex w-fit items-center gap-2 border-b pb-2 font-semibold"
+        >
           <span>I</span>
-          <Heart className="size-4 fill-pink-500 text-pink-500" aria-label="love" />
+          <Heart
+            className="size-4 fill-pink-500 text-pink-500"
+            aria-label="love"
+          />
         </h2>
 
         <p className="text-sm text-muted-foreground">

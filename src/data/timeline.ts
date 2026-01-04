@@ -18,12 +18,19 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     year: "2022",
-    content:
-      "Left then current role and started working as a front-end engineer.",
+    content: "Left finance role and started working as a software engineer.",
   },
   {
     year: "2023",
     content:
       "Got accepted in University of Essex for BSc in Computer Science and relocated to UK.",
+  },
+  {
+    year: "2024",
+    content: "Asked my partner to marry me, she said YES!",
+  },
+  {
+    year: "2025",
+    content: "Co-founded Fluxx, a software company, with my friend.",
   },
 ];
