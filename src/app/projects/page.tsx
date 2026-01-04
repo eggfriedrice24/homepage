@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 
-import { ExternalLink } from "lucide-react";
+import { ExternalLink as ExternalLinkIcon } from "lucide-react";
 
+import { ExternalLink } from "@/components/external-link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { projects } from "@/data/projects";
+
+import { StatusIndicator } from "./_components/status-indicator";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -13,57 +17,6 @@ export const metadata: Metadata = {
     description: "A collection of projects I've been working on. Full-stack applications, open source contributions, and experiments.",
   },
 };
-
-type Project = {
-  name: string;
-  description: string;
-  tech: string[];
-  features: string[];
-  status: "development" | "live" | "archived";
-  url?: string;
-};
-
-const projects: Project[] = [
-  {
-    name: "Tally",
-    description: "Modern accounting & invoicing platform for small businesses and teams. A multi-tenant SaaS application for managing financial workflows.",
-    tech: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "PostgreSQL",
-      "Drizzle ORM",
-      "Tauri",
-      "OpenAI GPT-4",
-      "TailwindCSS",
-    ],
-    features: [
-      "AI-powered invoice creation with natural language",
-      "Multi-tenant architecture with RBAC",
-      "Cross-platform desktop app (macOS, Windows, Linux)",
-      "Invoice PDF generation with customizable templates",
-      "Financial reporting and analytics",
-    ],
-    status: "development",
-  },
-];
-
-function StatusIndicator({ status }: { status: Project["status"] }) {
-  const config = {
-    development: { color: "bg-yellow-400", label: "In Development" },
-    live: { color: "bg-green-400", label: "Live" },
-    archived: { color: "bg-gray-400 animate-none", label: "Archived" },
-  };
-
-  const { color, label } = config[status];
-
-  return (
-    <div className="flex items-center gap-2">
-      <span className={`size-2 animate-pulse rounded-full ${color}`} aria-hidden="true" />
-      <span className="text-xs text-muted-foreground">{label}</span>
-    </div>
-  );
-}
 
 export default function ProjectsPage() {
   return (
@@ -89,15 +42,13 @@ export default function ProjectsPage() {
                     <CardTitle className="flex items-center gap-2">
                       {project.name}
                       {project.url && (
-                        <a
+                        <ExternalLink
                           href={project.url}
-                          target="_blank"
-                          rel="noreferrer"
                           className="text-muted-foreground transition-colors hover:text-foreground"
                           aria-label={`Visit ${project.name}`}
                         >
-                          <ExternalLink className="size-4" aria-hidden="true" />
-                        </a>
+                          <ExternalLinkIcon className="size-4" aria-hidden="true" />
+                        </ExternalLink>
                       )}
                     </CardTitle>
                     <CardDescription>{project.description}</CardDescription>

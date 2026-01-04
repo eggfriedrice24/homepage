@@ -12,6 +12,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { siteConfig } from "@/config/site";
 
 import "./globals.css";
 
@@ -20,29 +21,6 @@ const mPlusRounded = M_PLUS_Rounded_1c({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700", "800"],
 });
-
-const siteConfig = {
-  name: "Ikako",
-  url: "https://ikako.dev",
-  description:
-    "Software engineer from Tbilisi, Georgia. Currently based in UK, London. Crafting smooth and user-friendly digital experiences with TypeScript, React, and Next.js.",
-  author: "Irakli Dzvelaia",
-  twitterHandle: "@IDzvelaia",
-  keywords: [
-    "software engineer",
-    "full-stack developer",
-    "frontend developer",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "web development",
-    "Irakli Dzvelaia",
-    "Ikako",
-    "London",
-    "UK",
-    "Georgia",
-  ],
-};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),

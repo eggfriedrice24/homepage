@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { ExternalLink } from "@/components/external-link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { Button } from "@/components/ui/button";
@@ -22,31 +23,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { SOCIALS, TABS } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
-const TABS = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Lab", href: "/lab" },
-] as const;
-
-const SOCIALS = [
-  {
-    label: "GitHub",
-    href: "https://github.com/eggfriedrice24",
-    icon: <Github className="size-4" />,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/irakli-dzvelaia",
-    icon: <Linkedin className="size-4 text-blue-600" />,
-  },
-  {
-    label: "Twitter",
-    href: "https://twitter.com/IDzvelaia",
-    icon: <Twitter className="size-4 text-sky-500" />,
-  },
-];
+const SOCIAL_ICONS = {
+  GitHub: <Github className="size-4" />,
+  LinkedIn: <Linkedin className="size-4 text-blue-600" />,
+  Twitter: <Twitter className="size-4 text-sky-500" />,
+} as const;
 
 export function FloatingNavbar() {
   const pathname = usePathname();
@@ -128,10 +112,12 @@ export function FloatingNavbar() {
                 asChild
                 className="cursor-pointer gap-2"
               >
-                <a href={social.href} target="_blank" rel="noreferrer">
-                  <span aria-hidden="true">{social.icon}</span>
+                <ExternalLink href={social.href}>
+                  <span aria-hidden="true">
+                    {SOCIAL_ICONS[social.label as keyof typeof SOCIAL_ICONS]}
+                  </span>
                   {social.label}
-                </a>
+                </ExternalLink>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
