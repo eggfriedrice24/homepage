@@ -2,33 +2,59 @@
 
 import type { Group } from "three";
 
-import { Float, OrbitControls } from "@react-three/drei";
+import { Float } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
+import * as THREE from "three";
 
-function RiceGrain({ position }: { position: [number, number, number] }) {
+function RiceGrain({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
   return (
-    <mesh position={position}>
-      <sphereGeometry args={[0.03, 4, 4]} />
-      <meshStandardMaterial color="#f5f5dc" flatShading />
+    <mesh position={position} rotation={rotation}>
+      <capsuleGeometry args={[0.015, 0.04, 4, 8]} />
+      <meshStandardMaterial color="#faf8f0" roughness={0.8} />
     </mesh>
   );
 }
 
-function EggPiece({ position }: { position: [number, number, number] }) {
+function EggPiece({ position, scale }: { position: [number, number, number]; scale: number }) {
   return (
-    <mesh position={position}>
-      <icosahedronGeometry args={[0.08, 0]} />
-      <meshStandardMaterial color="#ffd700" flatShading />
+    <mesh position={position} scale={scale}>
+      <dodecahedronGeometry args={[0.06, 0]} />
+      <meshStandardMaterial color="#ffdb58" roughness={0.6} />
     </mesh>
   );
 }
 
-function GreenOnion({ position }: { position: [number, number, number] }) {
+function GreenOnion({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
   return (
-    <mesh position={position} rotation={[Math.random(), Math.random(), 0]}>
-      <cylinderGeometry args={[0.02, 0.02, 0.1, 6]} />
-      <meshStandardMaterial color="#228b22" flatShading />
+    <mesh position={position} rotation={rotation}>
+      <cylinderGeometry args={[0.012, 0.015, 0.06, 8]} />
+      <meshStandardMaterial color="#5cb85c" roughness={0.7} />
+    </mesh>
+  );
+}
+
+function BowlMesh() {
+  const bowlShape = useMemo(() => {
+    const points = [];
+    for (let i = 0; i <= 20; i++) {
+      const t = i / 20;
+      const x = 0.25 + 0.25 * Math.sin(t * Math.PI * 0.5);
+      const y = -0.2 + t * 0.35;
+      points.push(new THREE.Vector2(x, y));
+    }
+    return points;
+  }, []);
+
+  return (
+    <mesh>
+      <latheGeometry args={[bowlShape, 32]} />
+      <meshStandardMaterial
+        color="#d4a574"
+        roughness={0.4}
+        metalness={0.1}
+        side={THREE.DoubleSide}
+      />
     </mesh>
   );
 }
@@ -38,80 +64,70 @@ function Bowl() {
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.2;
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.3;
     }
   });
 
   const riceGrains = useMemo(() => {
-    const grains: [number, number, number][] = [];
-    for (let i = 0; i < 80; i++) {
+    const grains: { pos: [number, number, number]; rot: [number, number, number] }[] = [];
+    for (let i = 0; i < 60; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 0.35;
-      const height = 0.15 + Math.random() * 0.15;
-      grains.push([
-        Math.cos(angle) * radius,
-        height,
-        Math.sin(angle) * radius,
-      ]);
+      const radius = Math.random() * 0.32;
+      const height = 0.08 + Math.random() * 0.08;
+      grains.push({
+        pos: [Math.cos(angle) * radius, height, Math.sin(angle) * radius],
+        rot: [Math.random() * 0.5, Math.random() * Math.PI, Math.random() * 0.5],
+      });
     }
     return grains;
   }, []);
 
   const eggPieces = useMemo(() => {
-    const pieces: [number, number, number][] = [];
-    for (let i = 0; i < 6; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 0.25;
-      pieces.push([
-        Math.cos(angle) * radius,
-        0.25 + Math.random() * 0.1,
-        Math.sin(angle) * radius,
-      ]);
+    const pieces: { pos: [number, number, number]; scale: number }[] = [];
+    for (let i = 0; i < 5; i++) {
+      const angle = (i / 5) * Math.PI * 2 + Math.random() * 0.5;
+      const radius = 0.1 + Math.random() * 0.15;
+      pieces.push({
+        pos: [Math.cos(angle) * radius, 0.14 + Math.random() * 0.04, Math.sin(angle) * radius],
+        scale: 0.8 + Math.random() * 0.4,
+      });
     }
     return pieces;
   }, []);
 
   const greenOnions = useMemo(() => {
-    const onions: [number, number, number][] = [];
-    for (let i = 0; i < 8; i++) {
+    const onions: { pos: [number, number, number]; rot: [number, number, number] }[] = [];
+    for (let i = 0; i < 6; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const radius = Math.random() * 0.3;
-      onions.push([
-        Math.cos(angle) * radius,
-        0.28 + Math.random() * 0.05,
-        Math.sin(angle) * radius,
-      ]);
+      const radius = Math.random() * 0.28;
+      onions.push({
+        pos: [Math.cos(angle) * radius, 0.16 + Math.random() * 0.03, Math.sin(angle) * radius],
+        rot: [Math.random() * 0.8 - 0.4, Math.random() * Math.PI, Math.random() * 0.8 - 0.4],
+      });
     }
     return onions;
   }, []);
 
   return (
     <group ref={groupRef}>
-      <mesh position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.5, 0.35, 0.3, 16, 1, true]} />
-        <meshStandardMaterial color="#8b4513" flatShading side={2} />
+      <BowlMesh />
+
+      {/* Rice base layer */}
+      <mesh position={[0, 0.05, 0]}>
+        <sphereGeometry args={[0.38, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2.5]} />
+        <meshStandardMaterial color="#fdf6e3" roughness={0.9} />
       </mesh>
 
-      <mesh position={[0, -0.15, 0]} rotation={[Math.PI, 0, 0]}>
-        <circleGeometry args={[0.35, 16]} />
-        <meshStandardMaterial color="#8b4513" flatShading />
-      </mesh>
-
-      <mesh position={[0, 0.1, 0]}>
-        <sphereGeometry args={[0.45, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2]} />
-        <meshStandardMaterial color="#fffacd" flatShading />
-      </mesh>
-
-      {riceGrains.map((pos, i) => (
-        <RiceGrain key={`rice-${i}`} position={pos} />
+      {riceGrains.map((grain, i) => (
+        <RiceGrain key={`rice-${i}`} position={grain.pos} rotation={grain.rot} />
       ))}
 
-      {eggPieces.map((pos, i) => (
-        <EggPiece key={`egg-${i}`} position={pos} />
+      {eggPieces.map((egg, i) => (
+        <EggPiece key={`egg-${i}`} position={egg.pos} scale={egg.scale} />
       ))}
 
-      {greenOnions.map((pos, i) => (
-        <GreenOnion key={`onion-${i}`} position={pos} />
+      {greenOnions.map((onion, i) => (
+        <GreenOnion key={`onion-${i}`} position={onion.pos} rotation={onion.rot} />
       ))}
     </group>
   );
@@ -119,29 +135,19 @@ function Bowl() {
 
 export function EggFriedRiceBowl() {
   return (
-    <div className="h-64 w-64">
+    <div className="size-24">
       <Canvas
-        camera={{ position: [1.5, 1.5, 1.5], fov: 45 }}
+        camera={{ position: [1.2, 1, 1.2], fov: 40 }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.6} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <directionalLight position={[-5, 3, -5]} intensity={0.3} />
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 8, 5]} intensity={1.2} />
+        <directionalLight position={[-3, 4, -3]} intensity={0.4} />
+        <pointLight position={[0, 3, 0]} intensity={0.3} />
 
-        <Float
-          speed={2}
-          rotationIntensity={0.2}
-          floatIntensity={0.3}
-        >
+        <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
           <Bowl />
         </Float>
-
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          minPolarAngle={Math.PI / 4}
-          maxPolarAngle={Math.PI / 2}
-        />
       </Canvas>
     </div>
   );

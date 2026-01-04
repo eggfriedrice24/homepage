@@ -1,6 +1,5 @@
 import { Heart } from "lucide-react";
 
-import { BowlLoader } from "@/components/three/bowl-loader";
 import { Separator } from "@/components/ui/separator";
 
 type TimelineEvent = {
@@ -35,111 +34,100 @@ const timelineEvents: TimelineEvent[] = [
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      <div className="fixed right-8 top-1/4 hidden lg:block">
-        <BowlLoader />
-      </div>
+    <div className="space-y-11">
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_100ms_both] space-y-4">
+        <h3 className="w-fit border-b pb-2 font-semibold">What I do</h3>
 
-      <div className="space-y-11 lg:max-w-xl">
-        <div className="flex justify-center lg:hidden">
-          <BowlLoader />
+        <p className="text-sm text-muted-foreground">
+          Full-stack engineer who loves building products from the ground up. I
+          work mostly with TypeScript, React, and Next.js on the frontend, and
+          Go for backend services. Particularly drawn to decentralized and
+          distributed systems - P2P networks, service meshes, and anything that
+          scales horizontally. Also fascinated by lower-level stuff, memory
+          management, hardware, and systems programming with Rust. I enjoy the
+          whole spectrum, from polished UIs to bare-metal performance.
+        </p>
+      </section>
+
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_200ms_both] space-y-4">
+        <div className="flex w-max items-center gap-2 border-b pb-2">
+          <div className="size-2 animate-pulse rounded-full bg-green-400" />
+          <h3 className="w-fit font-semibold">Currently</h3>
         </div>
 
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_100ms_both] space-y-4">
-          <h3 className="w-fit border-b pb-2 font-semibold">What I do</h3>
+        <p className="text-sm text-muted-foreground">
+          Building
+          {" "}
+          <span className="font-medium text-foreground">Tally</span>
+          , a
+          modern accounting &amp; invoicing platform with AI-powered invoice
+          creation, multi-tenant architecture, and a cross-platform desktop app
+          built with Tauri. Also working on my capstone project
+          {" "}
+          <span className="font-medium text-foreground">t-mesh</span>
+          , a
+          distributed P2P translation service mesh in Go featuring a CLI
+          orchestrator, PostgreSQL backend, and intelligent worker selection.
+          Final year at University of Essex, graduating 2026.
+        </p>
+      </section>
 
-          <p className="text-sm text-muted-foreground">
-            Full-stack engineer who loves building products from the ground up.
-            I work mostly with TypeScript, React, and Next.js on the frontend,
-            and Go for backend services. Particularly drawn to decentralized and
-            distributed systems - P2P networks, service meshes, and anything
-            that scales horizontally. Also fascinated by lower-level stuff,
-            memory management, hardware, and systems programming with Rust. I
-            enjoy the whole spectrum, from polished UIs to bare-metal
-            performance.
-          </p>
-        </section>
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_300ms_both] space-y-4">
+        <h3 className="w-fit border-b pb-2 font-semibold">Bio</h3>
 
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_200ms_both] space-y-4">
-          <div className="flex w-max items-center gap-2 border-b pb-2">
-            <div className="size-2 animate-pulse rounded-full bg-green-400" />
-            <h3 className="w-fit font-semibold">Currently</h3>
-          </div>
+        <div className="relative" aria-label="Timeline">
+          <div
+            className="absolute left-16 top-0 h-full w-0.5 bg-border"
+            role="presentation"
+          />
 
-          <p className="text-sm text-muted-foreground">
-            Building
-            {" "}
-            <span className="font-medium text-foreground">Tally</span>
-            ,
-            a modern accounting &amp; invoicing platform with AI-powered invoice
-            creation, multi-tenant architecture, and a cross-platform desktop
-            app built with Tauri. Also working on my capstone project
-            {" "}
-            <span className="font-medium text-foreground">t-mesh</span>
-            , a
-            distributed P2P translation service mesh in Go featuring a CLI
-            orchestrator, PostgreSQL backend, and intelligent worker selection.
-            Final year at University of Essex, graduating 2026.
-          </p>
-        </section>
-
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_300ms_both] space-y-4">
-          <h3 className="w-fit border-b pb-2 font-semibold">Bio</h3>
-
-          <div className="relative" aria-label="Timeline">
-            <div
-              className="absolute left-16 top-0 h-full w-0.5 bg-border"
-              role="presentation"
-            />
-
-            <ol className="relative list-none p-0">
-              {timelineEvents.map(event => (
-                <li
-                  key={event.year}
-                  className="relative mb-2 flex items-start gap-8 last:mb-0"
+          <ol className="relative list-none p-0">
+            {timelineEvents.map(event => (
+              <li
+                key={event.year}
+                className="relative mb-2 flex items-start gap-8 last:mb-0"
+              >
+                <time
+                  dateTime={event.year}
+                  className="w-12 text-right font-bold text-foreground"
                 >
-                  <time
-                    dateTime={event.year}
-                    className="w-12 text-right font-bold text-foreground"
-                  >
-                    {event.year}
-                  </time>
+                  {event.year}
+                </time>
 
-                  <p className="flex-1 pt-[2px] text-sm text-muted-foreground">
-                    {event.content}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+                <p className="flex-1 pt-[2px] text-sm text-muted-foreground">
+                  {event.content}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_400ms_both] space-y-4">
-          <h3 className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
-            I
-            {" "}
-            <Heart className="size-4 fill-pink-500 text-pink-500" />
-          </h3>
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_400ms_both] space-y-4">
+        <h3 className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
+          I
+          {" "}
+          <Heart className="size-4 fill-pink-500 text-pink-500" />
+        </h3>
 
-          <p className="text-sm text-muted-foreground">
-            coding, skiing, hiking, reading, movies, manga, anime, sports:
-            especially
-            {" "}
-            <span className="text-primary">-&gt;</span>
-            {" "}
-            football.
-          </p>
-        </section>
+        <p className="text-sm text-muted-foreground">
+          coding, skiing, hiking, reading, movies, manga, anime, sports:
+          especially
+          {" "}
+          <span className="text-primary">-&gt;</span>
+          {" "}
+          football.
+        </p>
+      </section>
 
-        <Separator className="my-12 animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_500ms_both]" />
+      <Separator className="my-12 animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_500ms_both]" />
 
-        <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
-          <p className="text-sm text-muted-foreground">
-            If you like what I do and want to collaborate, feel free to reach
-            out via social links in the navigation below.
-          </p>
-        </section>
-      </div>
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
+        <p className="text-sm text-muted-foreground">
+          If you like what I do and want to collaborate, feel free to reach out
+          via social links in the navigation below.
+        </p>
+      </section>
     </div>
   );
 }

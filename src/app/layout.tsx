@@ -5,7 +5,9 @@ import { M_PLUS_Rounded_1c } from "next/font/google";
 
 import { FloatingNavbar } from "@/components/floating-navbar";
 import { Providers } from "@/components/providers";
+import { BowlLoader } from "@/components/three/bowl-loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 import "./globals.css";
 
@@ -143,7 +145,7 @@ export default function RootLayout({
         className={`${mPlusRounded.variable} font-sans antialiased`}
       >
         <Providers>
-          <main className="mx-auto flex min-h-screen max-w-3xl flex-col px-6 pb-24 pt-12">
+          <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 pb-24 pt-12">
             <div className="mb-8 flex items-center gap-4">
               <Avatar className="size-16">
                 <AvatarImage src="/me.jpg" alt="Ikako" />
@@ -155,6 +157,16 @@ export default function RootLayout({
                   Software Engineer
                 </p>
               </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="ml-auto cursor-pointer">
+                    <BowlLoader />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>eggfriedrice 🍳</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
 
             {children}
