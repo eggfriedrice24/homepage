@@ -37,9 +37,9 @@ export default function ProjectsPage() {
           >
             <Card>
               <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="space-y-1">
-                    <h3 className="flex items-center gap-2 font-semibold leading-none">
+                <div className="space-y-1">
+                  <h3 className="flex items-center gap-4 font-semibold leading-none">
+                    <span className="flex items-center gap-2">
                       {project.name}
                       {project.url && (
                         <ExternalLink
@@ -50,10 +50,10 @@ export default function ProjectsPage() {
                           <ExternalLinkIcon className="size-4" aria-hidden="true" />
                         </ExternalLink>
                       )}
-                    </h3>
-                    <CardDescription>{project.description}</CardDescription>
-                  </div>
-                  <StatusIndicator status={project.status} />
+                    </span>
+                    <StatusIndicator status={project.status} />
+                  </h3>
+                  <CardDescription>{project.description}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">

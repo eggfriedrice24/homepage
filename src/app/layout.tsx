@@ -145,41 +145,43 @@ export default function RootLayout({
       <body className={`${mPlusRounded.variable} font-sans antialiased`}>
         <Providers>
           <div className="mx-auto flex min-h-screen max-w-xl flex-col px-6 pb-24 pt-12">
-            <header className="mb-8 flex items-center gap-4">
-              <Avatar className="size-16">
-                <AvatarImage src="/me.jpg" alt="Ikako" />
-                <AvatarFallback>IK</AvatarFallback>
-              </Avatar>
-              <div>
-                <h1 className="font-semibold">Ikako Dzvelaia</h1>
-                <p className="text-sm text-muted-foreground">
-                  Software Engineer
-                </p>
-                <p className="flex items-center gap-1 text-sm text-muted-foreground">
-                  Co-Founder & CTO at
-                  <Image
-                    src="/fluxx-logo-light.svg"
-                    alt="Fluxx"
-                    width={40}
-                    height={14}
-                    priority
-                    className="dark:hidden"
-                  />
-                  <Image
-                    src="/fluxx-logo-dark.svg"
-                    alt="Fluxx"
-                    width={40}
-                    height={14}
-                    priority
-                    className="hidden dark:inline-block"
-                  />
-                </p>
+            <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <div className="flex items-center gap-4">
+                <Avatar className="size-16">
+                  <AvatarImage src="/me.jpg" alt="Ikako" />
+                  <AvatarFallback>IK</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h1 className="font-semibold">Ikako Dzvelaia</h1>
+                  <p className="text-sm text-muted-foreground">
+                    Software Engineer
+                  </p>
+                  <p className="flex items-center gap-1 text-sm text-muted-foreground">
+                    Co-Founder & CTO at
+                    <Image
+                      src="/fluxx-logo-light.svg"
+                      alt="Fluxx"
+                      width={40}
+                      height={14}
+                      priority
+                      className="dark:hidden"
+                    />
+                    <Image
+                      src="/fluxx-logo-dark.svg"
+                      alt="Fluxx"
+                      width={40}
+                      height={14}
+                      priority
+                      className="hidden dark:inline-block"
+                    />
+                  </p>
+                </div>
               </div>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div
                     role="img"
-                    className="ml-auto cursor-pointer"
+                    className="cursor-pointer sm:ml-auto"
                     aria-label="eggfriedrice mascot"
                   >
                     <BowlLoader />
