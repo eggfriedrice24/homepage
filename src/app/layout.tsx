@@ -7,7 +7,11 @@ import { FloatingNavbar } from "@/components/floating-navbar";
 import { Providers } from "@/components/providers";
 import { BowlLoader } from "@/components/three/bowl-loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 import "./globals.css";
 
@@ -20,7 +24,8 @@ const mPlusRounded = M_PLUS_Rounded_1c({
 const siteConfig = {
   name: "Ikako",
   url: "https://ikako.dev",
-  description: "Software engineer from Tbilisi, Georgia. Currently based in UK, London. Crafting smooth and user-friendly digital experiences with TypeScript, React, and Next.js.",
+  description:
+    "Software engineer from Tbilisi, Georgia. Currently based in UK, London. Crafting smooth and user-friendly digital experiences with TypeScript, React, and Next.js.",
   author: "Irakli Dzvelaia",
   twitterHandle: "@IDzvelaia",
   keywords: [
@@ -107,7 +112,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link rel="icon" type="image/png" sizes="32x32" href="/icon.png" />
         <script
           type="application/ld+json"
@@ -141,11 +150,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${mPlusRounded.variable} font-sans antialiased`}
-      >
+      <body className={`${mPlusRounded.variable} font-sans antialiased`}>
         <Providers>
-          <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 pb-24 pt-12">
+          <div className="mx-auto flex min-h-screen max-w-xl flex-col px-6 pb-24 pt-12">
             <header className="mb-8 flex items-center gap-4">
               <Avatar className="size-16">
                 <AvatarImage src="/me.jpg" alt="Ikako" />
@@ -159,7 +166,10 @@ export default function RootLayout({
               </div>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="ml-auto cursor-pointer" aria-label="eggfriedrice mascot">
+                  <div
+                    className="ml-auto cursor-pointer"
+                    aria-label="eggfriedrice mascot"
+                  >
                     <BowlLoader />
                   </div>
                 </TooltipTrigger>
@@ -169,9 +179,7 @@ export default function RootLayout({
               </Tooltip>
             </header>
 
-            <main>
-              {children}
-            </main>
+            <main>{children}</main>
 
             <footer className="mt-auto pt-8 text-center">
               <small className="text-xs text-muted-foreground">

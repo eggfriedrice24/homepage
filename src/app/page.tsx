@@ -64,8 +64,8 @@ export default function HomePage() {
           built with Tauri. Also working on my capstone project
           {" "}
           <span className="font-medium text-foreground">t-mesh</span>
-          , a distributed P2P translation service mesh in Go featuring a CLI
-          orchestrator, PostgreSQL backend, and intelligent worker selection.
+          , a decentralized P2P translation service mesh in Go using libp2p,
+          featuring CLI-based job orchestration and AI-powered worker selection.
           Final year at University of Essex, graduating 2026.
         </p>
       </section>

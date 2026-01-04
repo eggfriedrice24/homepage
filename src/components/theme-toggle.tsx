@@ -88,45 +88,45 @@ export function ThemeToggle() {
       >
         <m.path
           variants={shineVariant}
-          d={moonPath}
-          className="absolute left-0 top-0 stroke-violet-200"
+          d={sunPath}
+          className="absolute left-0 top-0 stroke-yellow-200"
           initial="hidden"
-          animate={theme === "dark" ? "visible" : "hidden"}
+          animate={theme === "light" ? "visible" : "hidden"}
         />
 
         <m.g
           variants={raysVariants}
           initial="hidden"
-          animate={theme === "light" ? "visible" : "hidden"}
+          animate={theme === "dark" ? "visible" : "hidden"}
           className="stroke-yellow-500"
           style={{ strokeLinecap: "round" }}
         >
-          <m.path className="origin-center" variants={rayVariant} d="M50 2V11" />
-          <m.path variants={rayVariant} d="M85 15L78 22" />
-          <m.path variants={rayVariant} d="M98 50H89" />
-          <m.path variants={rayVariant} d="M85 85L78 78" />
-          <m.path variants={rayVariant} d="M50 98V89" />
-          <m.path variants={rayVariant} d="M23 78L16 84" />
-          <m.path variants={rayVariant} d="M11 50H2" />
-          <m.path variants={rayVariant} d="M23 23L16 16" />
+          <m.path className="origin-center" variants={rayVariant} d="M50 -2V11" />
+          <m.path variants={rayVariant} d="M88 12L78 22" />
+          <m.path variants={rayVariant} d="M102 50H89" />
+          <m.path variants={rayVariant} d="M88 88L78 78" />
+          <m.path variants={rayVariant} d="M50 102V89" />
+          <m.path variants={rayVariant} d="M12 88L22 78" />
+          <m.path variants={rayVariant} d="M-2 50H11" />
+          <m.path variants={rayVariant} d="M12 12L22 22" />
         </m.g>
 
         <m.path
-          d={sunPath}
-          className="fill-primary/35 stroke-primary dark:fill-violet-500/35 dark:stroke-violet-500"
+          d={moonPath}
+          className="fill-violet-500/35 stroke-violet-500 dark:fill-primary dark:stroke-primary"
           transition={{ duration: 1, type: "spring" }}
           animate={
-            theme === "dark"
+            theme === "light"
               ? {
                   d: moonPath,
-                  rotate: -360,
+                  rotate: 0,
                   scale: 2,
-                  transition: { delay: 0.1 },
                 }
               : {
                   d: sunPath,
-                  rotate: 0,
+                  rotate: 360,
                   scale: 1,
+                  transition: { delay: 0.1 },
                 }
           }
         />
