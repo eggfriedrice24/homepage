@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 export type NavTab = {
   label: string;
   href: string;
@@ -8,7 +6,6 @@ export type NavTab = {
 export type SocialLink = {
   label: string;
   href: string;
-  icon: ReactNode;
 };
 
 export const TABS: NavTab[] = [

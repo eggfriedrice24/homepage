@@ -69,7 +69,7 @@ export function TimelineCarousel() {
               disabled={currentPage === 0}
               aria-label="Previous page"
             >
-              <ChevronLeft className="size-4" />
+              <ChevronLeft className="size-4" aria-hidden="true" />
             </Button>
             <span className="text-xs text-muted-foreground">
               {currentPage + 1}
@@ -84,7 +84,7 @@ export function TimelineCarousel() {
               disabled={currentPage === totalPages - 1}
               aria-label="Next page"
             >
-              <ChevronRight className="size-4" />
+              <ChevronRight className="size-4" aria-hidden="true" />
             </Button>
           </div>
         )}
@@ -94,7 +94,7 @@ export function TimelineCarousel() {
         <CarouselContent>
           {pages.map((pageEvents, pageIndex) => (
             <CarouselItem key={pageIndex}>
-              <div className="relative" aria-label="Timeline">
+              <div className="relative">
                 <div
                   className="absolute left-16 top-0 h-full w-0.5 bg-border"
                   role="presentation"

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { M_PLUS_Rounded_1c } from "next/font/google";
+import Image from "next/image";
 
 import { FloatingNavbar } from "@/components/floating-navbar";
 import { Providers } from "@/components/providers";
@@ -107,10 +108,17 @@ export default function RootLayout({
               "url": siteConfig.url,
               "image": `${siteConfig.url}/og-image.png`,
               "jobTitle": "Software Engineer",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Self-employed",
-              },
+              "worksFor": [
+                {
+                  "@type": "Organization",
+                  "name": "Noxtton",
+                },
+                {
+                  "@type": "Organization",
+                  "name": "Fluxx",
+                  "description": "Co-Founder & CTO",
+                },
+              ],
               "sameAs": [
                 "https://github.com/eggfriedrice24",
                 "https://linkedin.com/in/irakli-dzvelaia",
@@ -121,8 +129,14 @@ export default function RootLayout({
                 "React",
                 "Next.js",
                 "Node.js",
+                "Go",
+                "Rust",
+                "Python",
+                "PostgreSQL",
+                "Distributed Systems",
                 "Web Development",
                 "Full-Stack Development",
+                "Systems Programming",
               ],
             }),
           }}
@@ -141,10 +155,28 @@ export default function RootLayout({
                 <p className="text-sm text-muted-foreground">
                   Software Engineer
                 </p>
+                <p className="flex items-center gap-1 text-sm text-muted-foreground">
+                  Co-Founder & CTO at
+                  <Image
+                    src="/fluxx-logo-light.svg"
+                    alt="Fluxx"
+                    width={40}
+                    height={14}
+                    className="dark:hidden"
+                  />
+                  <Image
+                    src="/fluxx-logo-dark.svg"
+                    alt="Fluxx"
+                    width={40}
+                    height={14}
+                    className="hidden dark:inline-block"
+                  />
+                </p>
               </div>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div
+                    role="img"
                     className="ml-auto cursor-pointer"
                     aria-label="eggfriedrice mascot"
                   >

@@ -75,13 +75,13 @@ export function FloatingNavbar() {
                 className="inline-flex size-9 items-center justify-center text-muted-foreground transition-colors duration-100 focus-visible:outline-2"
               >
                 {tab.label === "Home" && (
-                  <User className={cn("size-4", isActive && "text-primary")} />
+                  <User className={cn("size-4", isActive && "text-primary")} aria-hidden="true" />
                 )}
                 {tab.label === "Projects" && (
-                  <Code2 className={cn("size-4", isActive && "text-primary")} />
+                  <Code2 className={cn("size-4", isActive && "text-primary")} aria-hidden="true" />
                 )}
                 {tab.label === "Lab" && (
-                  <FlaskConical className="size-4 text-emerald-500" />
+                  <FlaskConical className="size-4 text-emerald-500" aria-hidden="true" />
                 )}
               </Link>
             );

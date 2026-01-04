@@ -1,5 +1,4 @@
 import { Heart } from "lucide-react";
-import Image from "next/image";
 
 import { Separator } from "@/components/ui/separator";
 
@@ -7,9 +6,9 @@ import { TimelineCarousel } from "./_components/timeline-carousel";
 
 export default function HomePage() {
   return (
-    <article className="space-y-11">
-      <section className="animate-in animate-in-2 space-y-4">
-        <h2 className="w-fit border-b pb-2 font-semibold">What I do</h2>
+    <article className="space-y-6">
+      <section className="animate-in animate-in-2 space-y-4" aria-labelledby="what-i-do-heading">
+        <h2 id="what-i-do-heading" className="w-fit border-b pb-2 font-semibold">What I do</h2>
 
         <p className="text-sm text-muted-foreground">
           Full-stack engineer who loves building products from the ground up. I
@@ -22,13 +21,13 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="animate-in animate-in-3 space-y-4">
+      <section className="animate-in animate-in-3 space-y-4" aria-labelledby="currently-heading">
         <div className="flex w-max items-center gap-2 border-b pb-2">
           <span
             className="size-2 animate-pulse rounded-full bg-green-400"
             aria-hidden="true"
           />
-          <h2 className="w-fit font-semibold">Currently</h2>
+          <h2 id="currently-heading" className="w-fit font-semibold">Currently</h2>
         </div>
 
         <p className="text-sm text-muted-foreground">
@@ -42,20 +41,7 @@ export default function HomePage() {
           {" "}
           under
           {" "}
-          <Image
-            src="/fluxx-logo-light.svg"
-            alt="Fluxx"
-            width={48}
-            height={12}
-            className="inline-block dark:hidden"
-          />
-          <Image
-            src="/fluxx-logo-dark.svg"
-            alt="Fluxx"
-            width={48}
-            height={12}
-            className="hidden dark:inline-block"
-          />
+          <span className="font-medium text-foreground">Fluxx</span>
           , a modern accounting & invoicing platform with AI-powered invoice
           creation, multi-tenant architecture, and a cross-platform desktop app
           built with Tauri. Also working on my capstone project
@@ -81,15 +67,16 @@ export default function HomePage() {
           <span>I</span>
           <Heart
             className="size-4 fill-pink-500 text-pink-500"
-            aria-label="love"
+            aria-hidden="true"
           />
+          <span className="sr-only">love</span>
         </h2>
 
         <p className="text-sm text-muted-foreground">
           coding, skiing, hiking, reading, movies, manga, anime, sports:
           especially
           {" "}
-          <span className="text-primary">-&gt;</span>
+          <span className="text-primary" aria-hidden="true">-&gt;</span>
           {" "}
           football.
         </p>

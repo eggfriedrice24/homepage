@@ -4,7 +4,7 @@ import { ExternalLink as ExternalLinkIcon } from "lucide-react";
 
 import { ExternalLink } from "@/components/external-link";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { projects } from "@/data/projects";
 
 import { StatusIndicator } from "./_components/status-indicator";
@@ -39,7 +39,7 @@ export default function ProjectsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <CardTitle className="flex items-center gap-2">
+                    <h3 className="flex items-center gap-2 font-semibold leading-none">
                       {project.name}
                       {project.url && (
                         <ExternalLink
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
                           <ExternalLinkIcon className="size-4" aria-hidden="true" />
                         </ExternalLink>
                       )}
-                    </CardTitle>
+                    </h3>
                     <CardDescription>{project.description}</CardDescription>
                   </div>
                   <StatusIndicator status={project.status} />
@@ -58,7 +58,7 @@ export default function ProjectsPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <h3 className="text-sm font-semibold">Features</h3>
+                  <h4 className="text-sm font-semibold">Features</h4>
                   <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
                     {project.features.map(feature => (
                       <li key={feature}>{feature}</li>
@@ -67,7 +67,7 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <h3 className="text-sm font-semibold">Tech Stack</h3>
+                  <h4 className="text-sm font-semibold">Tech Stack</h4>
                   <ul className="flex flex-wrap gap-2" aria-label="Technologies used">
                     {project.tech.map(tech => (
                       <li key={tech}>
