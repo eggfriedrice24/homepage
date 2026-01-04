@@ -162,6 +162,7 @@ export default function RootLayout({
                     alt="Fluxx"
                     width={40}
                     height={14}
+                    priority
                     className="dark:hidden"
                   />
                   <Image
@@ -169,6 +170,7 @@ export default function RootLayout({
                     alt="Fluxx"
                     width={40}
                     height={14}
+                    priority
                     className="hidden dark:inline-block"
                   />
                 </p>
