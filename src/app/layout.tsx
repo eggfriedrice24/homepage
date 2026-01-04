@@ -145,8 +145,8 @@ export default function RootLayout({
         className={`${mPlusRounded.variable} font-sans antialiased`}
       >
         <Providers>
-          <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 pb-24 pt-12">
-            <div className="mb-8 flex items-center gap-4">
+          <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 pb-24 pt-12">
+            <header className="mb-8 flex items-center gap-4">
               <Avatar className="size-16">
                 <AvatarImage src="/me.jpg" alt="Ikako" />
                 <AvatarFallback>IK</AvatarFallback>
@@ -159,7 +159,7 @@ export default function RootLayout({
               </div>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="ml-auto cursor-pointer">
+                  <div className="ml-auto cursor-pointer" aria-label="eggfriedrice mascot">
                     <BowlLoader />
                   </div>
                 </TooltipTrigger>
@@ -167,18 +167,22 @@ export default function RootLayout({
                   <p>eggfriedrice 🍳</p>
                 </TooltipContent>
               </Tooltip>
-            </div>
+            </header>
 
-            {children}
+            <main>
+              {children}
+            </main>
 
-            <span className="mt-auto pt-8 text-center text-xs text-muted-foreground">
-              &copy;
-              {" "}
-              {new Date().getFullYear()}
-              {" "}
-              Ikako Dzvelaia
-            </span>
-          </main>
+            <footer className="mt-auto pt-8 text-center">
+              <small className="text-xs text-muted-foreground">
+                &copy;
+                {" "}
+                {new Date().getFullYear()}
+                {" "}
+                Ikako Dzvelaia
+              </small>
+            </footer>
+          </div>
           <FloatingNavbar />
         </Providers>
       </body>

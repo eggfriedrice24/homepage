@@ -73,64 +73,69 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-8">
       <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_0ms_both] space-y-4">
-        <h1 className="text-2xl font-bold">Projects</h1>
+        <h2 className="text-2xl font-bold">Projects</h2>
         <p className="text-sm text-muted-foreground">
           A collection of projects I&apos;ve been working on.
         </p>
       </section>
 
-      <div className="grid gap-6">
+      <section className="grid gap-6" aria-label="Project list">
         {projects.map((project, index) => (
-          <Card
+          <article
             key={project.name}
             className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_both]"
             style={{ animationDelay: `${(index + 1) * 100}ms` }}
           >
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className="space-y-1">
-                  <CardTitle className="flex items-center gap-2">
-                    {project.name}
-                    {project.url && (
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-muted-foreground transition-colors hover:text-foreground"
-                      >
-                        <ExternalLink className="size-4" />
-                      </a>
-                    )}
-                  </CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
+            <Card>
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="space-y-1">
+                    <CardTitle className="flex items-center gap-2">
+                      {project.name}
+                      {project.url && (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-muted-foreground transition-colors hover:text-foreground"
+                          aria-label={`Visit ${project.name}`}
+                        >
+                          <ExternalLink className="size-4" aria-hidden="true" />
+                        </a>
+                      )}
+                    </CardTitle>
+                    <CardDescription>{project.description}</CardDescription>
+                  </div>
+                  <StatusIndicator status={project.status} />
                 </div>
-                <StatusIndicator status={project.status} />
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold">Features</h4>
-                <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
-                  {project.features.map(feature => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-sm font-semibold">Features</h3>
+                  <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
+                    {project.features.map(feature => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
 
-              <div className="space-y-2">
-                <h4 className="text-sm font-semibold">Tech Stack</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map(tech => (
-                    <Badge key={tech} variant="secondary">
-                      {tech}
-                    </Badge>
-                  ))}
+                <div className="space-y-2">
+                  <h3 className="text-sm font-semibold">Tech Stack</h3>
+                  <ul className="flex flex-wrap gap-2" aria-label="Technologies used">
+                    {project.tech.map(tech => (
+                      <li key={tech}>
+                        <Badge variant="secondary">
+                          {tech}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </article>
         ))}
-      </div>
+      </section>
     </div>
   );
 }

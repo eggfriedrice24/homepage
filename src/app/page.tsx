@@ -34,9 +34,9 @@ const timelineEvents: TimelineEvent[] = [
 
 export default function HomePage() {
   return (
-    <div className="space-y-11">
+    <article className="space-y-11">
       <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_100ms_both] space-y-4">
-        <h3 className="w-fit border-b pb-2 font-semibold">What I do</h3>
+        <h2 className="w-fit border-b pb-2 font-semibold">What I do</h2>
 
         <p className="text-sm text-muted-foreground">
           Full-stack engineer who loves building products from the ground up. I
@@ -51,8 +51,8 @@ export default function HomePage() {
 
       <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_200ms_both] space-y-4">
         <div className="flex w-max items-center gap-2 border-b pb-2">
-          <div className="size-2 animate-pulse rounded-full bg-green-400" />
-          <h3 className="w-fit font-semibold">Currently</h3>
+          <span className="size-2 animate-pulse rounded-full bg-green-400" aria-hidden="true" />
+          <h2 className="w-fit font-semibold">Currently</h2>
         </div>
 
         <p className="text-sm text-muted-foreground">
@@ -72,8 +72,8 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_300ms_both] space-y-4">
-        <h3 className="w-fit border-b pb-2 font-semibold">Bio</h3>
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_300ms_both] space-y-4" aria-labelledby="bio-heading">
+        <h2 id="bio-heading" className="w-fit border-b pb-2 font-semibold">Bio</h2>
 
         <div className="relative" aria-label="Timeline">
           <div
@@ -103,12 +103,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_400ms_both] space-y-4">
-        <h3 className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
-          I
-          {" "}
-          <Heart className="size-4 fill-pink-500 text-pink-500" />
-        </h3>
+      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_400ms_both] space-y-4" aria-labelledby="interests-heading">
+        <h2 id="interests-heading" className="flex w-fit items-center gap-2 border-b pb-2 font-semibold">
+          <span>I</span>
+          <Heart className="size-4 fill-pink-500 text-pink-500" aria-label="love" />
+        </h2>
 
         <p className="text-sm text-muted-foreground">
           coding, skiing, hiking, reading, movies, manga, anime, sports:
@@ -122,12 +121,12 @@ export default function HomePage() {
 
       <Separator className="my-12 animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_500ms_both]" />
 
-      <section className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
+      <aside className="animate-[slide-down-fade_0.6s_cubic-bezier(0.16,1,0.3,1)_600ms_both] space-y-4">
         <p className="text-sm text-muted-foreground">
           If you like what I do and want to collaborate, feel free to reach out
           via social links in the navigation below.
         </p>
-      </section>
-    </div>
+      </aside>
+    </article>
   );
 }
