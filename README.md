@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ikako.dev
+
+Personal portfolio website featuring an interactive 3D egg fried rice bowl.
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- Three.js with @react-three/fiber
+- shadcn/ui
+- M PLUS Rounded 1c Font
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Run development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:2424](http://localhost:2424) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Build for production
+pnpm build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Run production build
+pnpm start
+```
 
-## Learn More
+## Forking & Usage
 
-To learn more about Next.js, take a look at the following resources:
+You are welcome to fork this repository and use it as a base for your own personal website. However, please note:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**The 3D egg fried rice bowl model (`src/components/three/egg-fried-rice-bowl.tsx`) is not included in the MIT license.** If you fork this repo, please create your own unique 3D element or remove it entirely. This restriction exists to keep the egg fried rice bowl as a distinctive feature of ikako.dev.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Everything else in this repository is free to use under the MIT license.
 
-## Deploy on Vercel
+## Credits
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Design inspiration from:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Takuya Matsuyama](https://www.craftz.dog/) (craftz.dog)
+- [Julien Thibeaut](https://ibelick.com/) (ibelick.com)
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+The 3D egg fried rice bowl component is excluded from this license.
