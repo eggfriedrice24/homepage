@@ -1,5 +1,6 @@
 import { Heart } from "lucide-react";
 
+import { FluxxText } from "@/components/fluxx-text";
 import { Separator } from "@/components/ui/separator";
 
 import { TimelineCarousel } from "./_components/timeline-carousel";
@@ -41,7 +42,7 @@ export default function HomePage() {
           {" "}
           under
           {" "}
-          <span className="font-medium text-foreground">Fluxx</span>
+          <FluxxText />
           , a modern accounting & invoicing platform with AI-powered invoice
           creation, multi-tenant architecture, and a cross-platform desktop app
           built with Tauri. Also working on my capstone project

@@ -1,6 +1,10 @@
+import type { ReactNode } from "react";
+
+import { FluxxText } from "@/components/fluxx-text";
+
 export type TimelineEvent = {
   year: string;
-  content: string;
+  content: ReactNode;
 };
 
 export const timelineEvents: TimelineEvent[] = [
@@ -31,6 +35,13 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     year: "2025",
-    content: "Co-founded Fluxx, a software company, with my friend.",
+    content: (
+      <>
+        Co-founded
+        {" "}
+        <FluxxText />
+        , a software company, with my friend.
+      </>
+    ),
   },
 ];
