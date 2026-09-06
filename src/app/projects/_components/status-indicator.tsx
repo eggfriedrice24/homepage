@@ -2,10 +2,16 @@ import type { Project } from "@/data/projects";
 
 import { cn } from "@/lib/utils";
 
-const statusConfig = {
-  development: { color: "bg-yellow-400", label: "In Development" },
-  live: { color: "bg-green-400", label: "Live" },
-  archived: { color: "bg-gray-400", label: "Archived" },
+export const statusLabels: Record<Project["status"], string> = {
+  development: "In Development",
+  live: "Live",
+  archived: "Archived",
+};
+
+const statusColors: Record<Project["status"], string> = {
+  development: "bg-yellow-400",
+  live: "bg-green-400",
+  archived: "bg-gray-400",
 };
 
 type StatusDotProps = {
@@ -18,25 +24,10 @@ export function StatusDot({ status, className }: StatusDotProps) {
     <span
       className={cn(
         "size-2 shrink-0 rounded-full",
-        statusConfig[status].color,
+        statusColors[status],
         className,
       )}
       aria-hidden="true"
     />
-  );
-}
-
-type StatusIndicatorProps = {
-  status: Project["status"];
-};
-
-export function StatusIndicator({ status }: StatusIndicatorProps) {
-  return (
-    <span className="inline-flex items-center gap-2">
-      <StatusDot status={status} />
-      <span className="text-xs text-muted-foreground">
-        {statusConfig[status].label}
-      </span>
-    </span>
   );
 }
