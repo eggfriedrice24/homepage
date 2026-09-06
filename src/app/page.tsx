@@ -8,7 +8,7 @@ import { TimelineCarousel } from "./_components/timeline-carousel";
 export default function HomePage() {
   return (
     <article className="space-y-6">
-      <section className="animate-in animate-in-2 space-y-4" aria-labelledby="what-i-do-heading">
+      <section className="animate-rise space-y-4" aria-labelledby="what-i-do-heading">
         <h2 id="what-i-do-heading" className="w-fit border-b pb-2 font-semibold">What I do</h2>
 
         <p className="text-sm text-muted-foreground">
@@ -22,7 +22,7 @@ export default function HomePage() {
         </p>
       </section>
 
-      <section className="animate-in animate-in-3 space-y-4" aria-labelledby="currently-heading">
+      <section className="animate-rise animate-delay-1 space-y-4" aria-labelledby="currently-heading">
         <div className="flex w-max items-center gap-2 border-b pb-2">
           <span
             className="size-2 animate-pulse rounded-full bg-green-400"
@@ -58,7 +58,7 @@ export default function HomePage() {
       <TimelineCarousel />
 
       <section
-        className="animate-in animate-in-5 space-y-4"
+        className="animate-rise animate-delay-3 space-y-4"
         aria-labelledby="interests-heading"
       >
         <h2
@@ -83,9 +83,9 @@ export default function HomePage() {
         </p>
       </section>
 
-      <Separator className="animate-in animate-in-6 my-12" />
+      <Separator className="animate-rise animate-delay-4 my-12" />
 
-      <aside className="animate-in animate-in-7 space-y-4">
+      <aside className="animate-rise animate-delay-5 space-y-4">
         <p className="text-sm text-muted-foreground">
           If you like what I do and want to collaborate, feel free to reach out
           via social links in the navigation below.

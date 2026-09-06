@@ -51,7 +51,7 @@ export function TimelineCarousel() {
 
   return (
     <section
-      className="animate-in animate-in-4 space-y-4"
+      className="animate-rise animate-delay-2 space-y-4"
       aria-labelledby="bio-heading"
     >
       <div className="flex items-center justify-between">
