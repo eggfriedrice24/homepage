@@ -45,18 +45,20 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --animate-slide-down-fade: slide-down-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Site-wide entrance animation. Full shorthand incl. fill-mode so
+     `animate-rise` is generated straight from the theme namespace. Defining it
+     in @layer utilities instead gets it tree-shaken, because `animate-rise`
+     only resolves as a candidate when a matching --animate-* key exists. */
+  --animate-rise: rise-fade 0.6s cubic-bezier(0.5, 1, 0.89, 1) var(--rise-base, 0.6s) both;
 
-  @keyframes slide-down-fade {
+  @keyframes rise-fade {
     0% {
       opacity: 0;
-      transform: translateY(-10px);
-      filter: blur(1px);
+      transform: translateY(16px);
     }
     100% {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
 }
@@ -141,29 +143,82 @@
   }
 }
 
-@layer utilities {
-  .animate-in {
-    animation: slide-down-fade 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* Stagger steps for `animate-rise`, 60ms apart to match the design's cadence.
+   Declared with @utility rather than @layer utilities so Tailwind registers
+   them as real utilities. Elements with no delay class start immediately.
+   Deliberately not named animate-in-*: `animate-in` belongs to tw-animate-css
+   and is used by the tooltip and dropdown, so redefining it hijacks those. */
+@utility animate-delay-1 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 60ms);
+}
+@utility animate-delay-2 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 120ms);
+}
+@utility animate-delay-3 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 180ms);
+}
+@utility animate-delay-4 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 240ms);
+}
+@utility animate-delay-5 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 300ms);
+}
+@utility animate-delay-6 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 360ms);
+}
+@utility animate-delay-7 {
+  animation-delay: calc(var(--rise-base, 0.6s) + 420ms);
+}
+
+/* Route transitions, driven by <ViewTransition name="page"> in layout.tsx.
+
+   Exit and enter are exact mirrors, sequenced rather than overlapped: the old
+   page finishes sinking away before the new content starts rising in.
+
+   The ordering is a plain constant delay, not a conditional one. An earlier
+   version swapped --rise-base between 0 and the exit duration via
+   :active-view-transition, so the delay only applied to navigations. That
+   re-times every running animate-rise the instant the value flips, and on load
+   hydration briefly enters a transition state, so animations that had already
+   started were restarted underneath - which looked like the page glitching or
+   looping. A constant can never do that.
+
+   The cost is that first load also waits --rise-base before content rises in.
+   That is deliberate: the masthead paints immediately and the route content
+   follows, which reads as a staged reveal rather than a delay. */
+:root {
+  --rise-base: 0.6s;
+}
+
+::view-transition-old(page) {
+  animation: page-exit 0.6s cubic-bezier(0.11, 0, 0.5, 0) both;
+}
+
+/* Left un-animated on purpose. The new view is live and its content starts
+   transparent (animate-rise has `both` fill plus the base delay), so the
+   outgoing snapshot stays visible underneath while it sinks away. Animating
+   this as well multiplies the two opacities and reads as a flicker. */
+::view-transition-new(page) {
+  animation: none;
+}
+
+/* The exact reverse of rise-fade: same 16px travel, mirrored easing
+   (easeInQuad is the exact time-reverse of the enter's easeOutQuad).
+   No filter: blurring a block of text reads as defocus, and the compositing
+   layer it forces is torn down on the last frame, snapping the text crisp. */
+@keyframes page-exit {
+  to {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  .animate-in-1 {
-    animation-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(page) {
+    animation: none;
   }
-  .animate-in-2 {
-    animation-delay: 100ms;
-  }
-  .animate-in-3 {
-    animation-delay: 200ms;
-  }
-  .animate-in-4 {
-    animation-delay: 300ms;
-  }
-  .animate-in-5 {
-    animation-delay: 400ms;
-  }
-  .animate-in-6 {
-    animation-delay: 500ms;
-  }
-  .animate-in-7 {
-    animation-delay: 600ms;
+
+  .animate-rise {
+    animation: none;
   }
 }
