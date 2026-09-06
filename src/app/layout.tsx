@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import Image from "next/image";
+import { ViewTransition } from "react";
 
 import { FloatingNavbar } from "@/components/floating-navbar";
 import { Providers } from "@/components/providers";
@@ -193,7 +194,11 @@ export default function RootLayout({
               </Tooltip>
             </header>
 
-            <main>{children}</main>
+            <main>
+              {/* Only the route content transitions; the masthead, footer and
+                  navbar sit outside and stay put across navigations. */}
+              <ViewTransition name="page">{children}</ViewTransition>
+            </main>
 
             <footer className="mt-auto pt-8 text-center">
               <small className="text-xs text-muted-foreground">
