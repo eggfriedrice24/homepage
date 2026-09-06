@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 
-import { ExternalLink as ExternalLinkIcon } from "lucide-react";
+import Link from "next/link";
 
-import { ExternalLink } from "@/components/external-link";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { projects } from "@/data/projects";
 
-import { StatusIndicator } from "./_components/status-indicator";
+import { ProjectThumbnail } from "./_components/project-thumbnail";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -21,66 +18,33 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <div className="space-y-8">
-      <section className="animate-in animate-in-1 space-y-4">
-        <h2 className="text-2xl font-bold">Projects</h2>
+      <section className="animate-rise space-y-2">
+        <h2 className="text-2xl font-bold tracking-[-0.01em]">Projects</h2>
         <p className="text-sm text-muted-foreground">
-          A collection of projects I&apos;ve been working on.
+          A collection of things I&apos;ve been building.
         </p>
       </section>
 
-      <section className="grid gap-6" aria-label="Project list">
+      <section
+        className="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-x-5 gap-y-7"
+        aria-label="Project list"
+      >
         {projects.map((project, index) => (
-          <article
-            key={project.name}
-            className="animate-in"
-            style={{ animationDelay: `${(index + 1) * 100}ms` }}
+          <Link
+            key={project.slug}
+            href={`/projects/${project.slug}`}
+            className="group animate-rise block"
+            style={{ animationDelay: `calc(var(--rise-base, 0.6s) + ${index * 60}ms)` }}
           >
-            <Card>
-              <CardHeader>
-                <div className="space-y-1">
-                  <h3 className="flex items-center gap-4 font-semibold leading-none">
-                    <span className="flex items-center gap-2">
-                      {project.name}
-                      {project.url && (
-                        <ExternalLink
-                          href={project.url}
-                          className="text-muted-foreground transition-colors hover:text-foreground"
-                          aria-label={`Visit ${project.name}`}
-                        >
-                          <ExternalLinkIcon className="size-4" aria-hidden="true" />
-                        </ExternalLink>
-                      )}
-                    </span>
-                    <StatusIndicator status={project.status} />
-                  </h3>
-                  <CardDescription>{project.description}</CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <h4 className="text-sm font-semibold">Features</h4>
-                  <ul className="list-inside list-disc space-y-1 text-sm text-muted-foreground">
-                    {project.features.map(feature => (
-                      <li key={feature}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="space-y-2">
-                  <h4 className="text-sm font-semibold">Tech Stack</h4>
-                  <ul className="flex flex-wrap gap-2" aria-label="Technologies used">
-                    {project.tech.map(tech => (
-                      <li key={tech}>
-                        <Badge variant="secondary">
-                          {tech}
-                        </Badge>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </article>
+            <ProjectThumbnail
+              label={project.slug}
+              status={project.status}
+              className="aspect-[4/3] transition duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[3px] group-hover:border-primary group-hover:shadow-lg"
+            />
+            <p className="mt-2.5 truncate text-center text-sm font-medium">
+              {project.name}
+            </p>
+          </Link>
         ))}
       </section>
     </div>
