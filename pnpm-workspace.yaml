@@ -2,8 +2,24 @@ shellEmulator: true
 
 trustPolicy: no-downgrade
 
+# Both entries below are pinned older releases that predate npm provenance
+# attestations, so no-downgrade reads them as a trust downgrade. Verified
+# against the registry: the lockfile integrity hashes match the published
+# tarballs exactly, and both are signed by their real maintainers
+# (semver -> lukekarrys, undici-types -> matteo.collina). Not a takeover.
+# Scoped to these exact versions so the policy still applies everywhere else.
+trustPolicyExclude:
+  - semver@6.3.1
+  - undici-types@6.21.0
+
 packages:
   - .
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
+allowBuilds:
+  # Matches the existing ignoredBuiltDependencies entry above: sharp's build
+  # script stays skipped. Next only needs it for production image optimization
+  # and falls back without it, so dev is unaffected. Flip to true if you want
+  # sharp compiled locally.
+  sharp: false
