@@ -78,7 +78,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         )}
       </header>
 
-      <ProjectGallery slug={project.slug} />
+      <ProjectGallery slug={project.slug} images={project.screenshots} />
 
       <p className="animate-rise animate-delay-4 mt-[22px] text-pretty text-sm leading-[1.7] text-muted-foreground">
         {project.description}

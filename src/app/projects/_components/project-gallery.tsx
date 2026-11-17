@@ -2,6 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import type { ProjectImage } from "@/data/projects";
+
+import { BlurImage } from "@/components/blur-image";
 import {
   Dialog,
   DialogContent,
@@ -9,18 +12,20 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
+import { HERO_SIZES, stripSizes, warmImage } from "./image-sizes";
+import { ImageStack } from "./image-stack";
 import { HATCH, ProjectThumbnail } from "./project-thumbnail";
 
 const pad = (index: number) => String(index + 1).padStart(2, "0");
 
 type ProjectGalleryProps = {
   slug: string;
-  /** Placeholder shots until real screenshots land. */
-  count?: number;
+  /** Empty means the project has no art yet; one hatch placeholder shows. */
+  images?: ProjectImage[];
 };
 
-export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
-  const total = Math.max(1, count);
+export function ProjectGallery({ slug, images = [] }: ProjectGalleryProps) {
+  const total = Math.max(1, images.length);
   const [shot, setShot] = useState(0);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
 
@@ -47,6 +52,7 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isPreviewOpen, step]);
 
+  const image = images[shot];
   const label = `${slug} ${pad(shot)}`;
   const counter = `${pad(shot)} / ${pad(total - 1)}`;
 
@@ -55,11 +61,19 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
       <button
         type="button"
         onClick={() => setPreviewOpen(true)}
+        // Intent to open: start fetching the full-size original now so the
+        // lightbox has it by the time the click lands.
+        onPointerEnter={() => image && warmImage(image.src, { unoptimized: true })}
+        onFocus={() => image && warmImage(image.src, { unoptimized: true })}
         aria-label={`Open ${slug} preview`}
         className="animate-rise animate-delay-2 group block w-full cursor-zoom-in"
       >
         <ProjectThumbnail
           label={label}
+          images={images}
+          active={shot}
+          sizes={HERO_SIZES}
+          preload
           className="aspect-video transition-colors duration-200 group-hover:border-primary"
         >
           <span className="absolute bottom-2.5 right-3 font-mono text-[10px] tracking-wider text-muted-foreground">
@@ -70,9 +84,9 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
 
       {total > 1 && (
         <div className="animate-rise animate-delay-3 mt-2.5 grid grid-cols-[repeat(auto-fit,minmax(72px,1fr))] gap-2">
-          {Array.from({ length: total }, (_, index) => (
+          {images.map((thumb, index) => (
             <button
-              key={pad(index)}
+              key={thumb.src.src}
               type="button"
               onClick={() => setShot(index)}
               aria-label={`Show ${slug} image ${pad(index)}`}
@@ -82,14 +96,12 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
                 index === shot ? "border-primary opacity-100" : "opacity-55",
               )}
             >
-              <span
-                className="absolute inset-0"
-                style={{ backgroundImage: HATCH }}
-                aria-hidden="true"
+              <BlurImage
+                src={thumb.src}
+                alt=""
+                sizes={stripSizes(images.length)}
+                className="object-cover"
               />
-              <span className="absolute inset-0 flex items-center justify-center font-mono text-[10px] text-muted-foreground">
-                {pad(index)}
-              </span>
             </button>
           ))}
         </div>
@@ -98,7 +110,9 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
       <Dialog open={isPreviewOpen} onOpenChange={setPreviewOpen}>
         <DialogContent
           showCloseButton={false}
-          className="flex max-w-[880px] flex-col gap-4 border-none bg-transparent p-0 shadow-none sm:max-w-[880px]"
+          // As wide as the window allows while the 16:9 shot, its counter
+          // line and the 6rem of arrow buttons still fit the height.
+          className="flex w-[min(94vw,calc((100dvh-7rem)*16/9+6rem))] max-w-none flex-col gap-4 border-none bg-transparent p-0 shadow-none sm:max-w-none"
         >
           <DialogTitle className="sr-only">
             {`${slug} preview, image ${counter}`}
@@ -115,14 +129,29 @@ export function ProjectGallery({ slug, count = 4 }: ProjectGalleryProps) {
             </button>
 
             <div className="relative aspect-video flex-1 overflow-hidden rounded-xl border border-white/20 bg-card">
-              <div
-                className="absolute inset-0"
-                style={{ backgroundImage: HATCH }}
-                aria-hidden="true"
-              />
-              <span className="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-wider text-muted-foreground">
-                {label}
-              </span>
+              {images.length > 0
+                ? (
+                    // Full-size originals: these are already compressed WebP,
+                    // and re-encoding blurs the small text in screenshots.
+                    <ImageStack
+                      images={images}
+                      active={shot}
+                      unoptimized
+                      className="object-contain"
+                    />
+                  )
+                : (
+                    <>
+                      <div
+                        className="absolute inset-0"
+                        style={{ backgroundImage: HATCH }}
+                        aria-hidden="true"
+                      />
+                      <span className="absolute inset-0 flex items-center justify-center font-mono text-xs tracking-wider text-muted-foreground">
+                        {label}
+                      </span>
+                    </>
+                  )}
             </div>
 
             <button
