@@ -15,7 +15,7 @@ export default function LabPage() {
   return (
     <section className="flex min-h-[60vh] flex-col items-center justify-center space-y-4" aria-labelledby="lab-heading">
       <div className="animate-rise">
-        <FlaskConical className="size-16 text-emerald-500" aria-hidden="true" />
+        <FlaskConical className="size-16 text-emerald-500 dark:text-egg-green" aria-hidden="true" />
       </div>
 
       <div className="animate-rise animate-delay-1 space-y-2 text-center">

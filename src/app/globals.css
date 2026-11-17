@@ -3,6 +3,28 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* eggfriedrice palette primitives, copied from eggfriedrice.nvim's
+   extras/palette/eggfriedrice.json (generated from lua/eggfriedrice/colors.lua).
+   The design system is dark-only, so these drive dark mode; light mode keeps
+   its own warm theme. Re-copy after a palette change there. */
+@theme {
+  --color-egg-bg-dark: #090c13;
+  --color-egg-bg: #0d111a;
+  --color-egg-bg-light: #121722;
+  --color-egg-selection: #2f3b54;
+  --color-egg-fg: #d8d3c3;
+  --color-egg-fg-dark: #a8a396;
+  --color-egg-fg-bright: #f2eddd;
+  --color-egg-comment: #8695b7;
+  --color-egg-yellow: #ffc940;
+  --color-egg-red: #e06c75;
+  --color-egg-purple: #c084fc;
+  --color-egg-green: #60e654;
+  --color-egg-blue: #6cb8ff;
+  --color-egg-cyan: #78e2d6;
+  --color-egg-orange: #fc9a2c;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -99,39 +121,49 @@
   --sidebar-ring: oklch(0.65 0.18 85);
 }
 
+/* Dark mode is the eggfriedrice palette, mapped by its semantic roles
+   (surface_*, text_*, accent_primary, focus, state_error). Roles the semantic
+   set does not name come from the palette's browser role map (zen/chromium):
+   hover, border, sidebar. */
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --glass: oklch(0.141 0.005 285.823 / 70%);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.795 0.184 86.047);
-  --primary-foreground: oklch(0.421 0.095 57.708);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.421 0.095 57.708);
-  --chart-1: oklch(0.905 0.182 98.111);
-  --chart-2: oklch(0.795 0.184 86.047);
-  --chart-3: oklch(0.681 0.162 75.834);
-  --chart-4: oklch(0.554 0.135 66.442);
-  --chart-5: oklch(0.476 0.114 61.907);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.795 0.184 86.047);
-  --sidebar-primary-foreground: oklch(0.987 0.026 102.212);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.421 0.095 57.708);
+  --background: var(--color-egg-bg); /* surface_1 */
+  --glass: color-mix(in oklab, var(--color-egg-bg) 70%, transparent);
+  --foreground: var(--color-egg-fg); /* text_primary */
+  --card: var(--color-egg-bg-light); /* surface_2 */
+  --card-foreground: var(--color-egg-fg);
+  --popover: var(--color-egg-bg-light);
+  --popover-foreground: var(--color-egg-fg);
+  --primary: var(--color-egg-yellow); /* accent_primary */
+  --primary-foreground: var(--color-egg-bg-dark); /* text_on_accent */
+  --secondary: var(--color-egg-bg-light);
+  --secondary-foreground: var(--color-egg-fg);
+  --muted: var(--color-egg-bg-light);
+  --muted-foreground: var(--color-egg-fg-dark); /* text_muted */
+  --accent: var(--color-egg-selection); /* browser hover */
+  --accent-foreground: var(--color-egg-fg);
+  --destructive: var(--color-egg-red); /* state_error */
+  --border: #46516c; /* browser border (text_decorative) */
+  --input: #46516c;
+  --ring: var(--color-egg-yellow); /* focus */
+  --chart-1: var(--color-egg-yellow);
+  --chart-2: var(--color-egg-green);
+  --chart-3: var(--color-egg-blue);
+  --chart-4: var(--color-egg-purple);
+  --chart-5: var(--color-egg-cyan);
+  --sidebar: var(--color-egg-bg-dark); /* browser sidebar */
+  --sidebar-foreground: var(--color-egg-fg);
+  --sidebar-primary: var(--color-egg-yellow);
+  --sidebar-primary-foreground: var(--color-egg-bg-dark);
+  --sidebar-accent: var(--color-egg-selection);
+  --sidebar-accent-foreground: var(--color-egg-fg);
+  --sidebar-border: #46516c;
+  --sidebar-ring: var(--color-egg-yellow);
+}
+
+/* selection_bg / selection_fg */
+.dark ::selection {
+  background-color: var(--color-egg-selection);
+  color: var(--color-egg-fg);
 }
 
 @layer base {

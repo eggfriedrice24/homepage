@@ -81,7 +81,7 @@ export function FloatingNavbar() {
                   <Code2 className={cn("size-4", isActive && "text-primary")} aria-hidden="true" />
                 )}
                 {tab.label === "Lab" && (
-                  <FlaskConical className="size-4 text-emerald-500" aria-hidden="true" />
+                  <FlaskConical className="size-4 text-emerald-500 dark:text-egg-green" aria-hidden="true" />
                 )}
               </Link>
             );

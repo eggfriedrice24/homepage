@@ -25,7 +25,7 @@ export default function HomePage() {
       <section className="animate-rise animate-delay-1 space-y-4" aria-labelledby="currently-heading">
         <div className="flex w-max items-center gap-2 border-b pb-2">
           <span
-            className="size-2 animate-pulse rounded-full bg-green-400"
+            className="size-2 animate-pulse rounded-full bg-green-400 dark:bg-egg-green"
             aria-hidden="true"
           />
           <h2 id="currently-heading" className="w-fit font-semibold">Currently</h2>
@@ -67,7 +67,7 @@ export default function HomePage() {
         >
           <span>I</span>
           <Heart
-            className="size-4 fill-pink-500 text-pink-500"
+            className="size-4 fill-pink-500 text-pink-500 dark:fill-egg-red dark:text-egg-red"
             aria-hidden="true"
           />
           <span className="sr-only">love</span>

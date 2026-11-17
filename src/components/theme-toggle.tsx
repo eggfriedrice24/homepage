@@ -98,7 +98,7 @@ export function ThemeToggle() {
           variants={raysVariants}
           initial="hidden"
           animate={theme === "dark" ? "visible" : "hidden"}
-          className="stroke-yellow-500"
+          className="stroke-yellow-500 dark:stroke-egg-yellow"
           style={{ strokeLinecap: "round" }}
         >
           <m.path className="origin-center" variants={rayVariant} d="M50 -2V11" />
