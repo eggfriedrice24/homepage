@@ -2,8 +2,8 @@
 
 import {
   Code2,
-  FlaskConical,
   Github,
+  Laptop,
   Linkedin,
   MoreHorizontal,
   Twitter,
@@ -40,8 +40,8 @@ export function FloatingNavbar() {
       return "Home";
     if (pathname.startsWith("/projects"))
       return "Projects";
-    if (pathname.startsWith("/lab"))
-      return "Lab";
+    if (pathname.startsWith("/uses"))
+      return "Uses";
     return "Home";
   };
 
@@ -80,8 +80,8 @@ export function FloatingNavbar() {
                 {tab.label === "Projects" && (
                   <Code2 className={cn("size-4", isActive && "text-primary")} aria-hidden="true" />
                 )}
-                {tab.label === "Lab" && (
-                  <FlaskConical className="size-4 text-emerald-500 dark:text-egg-green" aria-hidden="true" />
+                {tab.label === "Uses" && (
+                  <Laptop className={cn("size-4", isActive && "text-primary")} aria-hidden="true" />
                 )}
               </Link>
             );

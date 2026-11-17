@@ -11,7 +11,7 @@ export type SocialLink = {
 export const TABS: NavTab[] = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Lab", href: "/lab" },
+  { label: "Uses", href: "/uses" },
 ];
 
 export const SOCIALS = [
