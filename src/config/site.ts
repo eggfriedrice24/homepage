@@ -22,6 +22,7 @@ export const siteConfig: SiteConfig = {
     "systems engineer",
     "software architecture",
     "TypeScript",
+    "JavaScript",
     "React",
     "Next.js",
     "Node.js",
