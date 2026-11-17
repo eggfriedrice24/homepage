@@ -66,16 +66,31 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <StatusDot status={project.status} className="size-1.5" />
         <span className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
           {statusLabels[project.status]}
+          {project.role && ` · ${project.role}`}
         </span>
-        {project.url && (
-          <ExternalLink
-            href={project.url}
-            className="ml-auto font-mono text-[11px] tracking-[0.04em] text-muted-foreground transition-colors hover:text-foreground"
-            aria-label={`Source for ${project.name}`}
-          >
-            source &#8599;
-          </ExternalLink>
-        )}
+        <span className="ml-auto flex gap-4 font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
+          {project.links?.map(link => (
+            <ExternalLink
+              key={link.href}
+              href={link.href}
+              className="transition-colors hover:text-foreground"
+              aria-label={`${link.label} for ${project.name}`}
+            >
+              {link.label}
+              {" "}
+              &#8599;
+            </ExternalLink>
+          ))}
+          {project.url && (
+            <ExternalLink
+              href={project.url}
+              className="transition-colors hover:text-foreground"
+              aria-label={`Source for ${project.name}`}
+            >
+              source &#8599;
+            </ExternalLink>
+          )}
+        </span>
       </header>
 
       <ProjectGallery slug={project.slug} images={project.screenshots} />
@@ -84,20 +99,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {project.description}
       </p>
 
-      <ul className="animate-rise animate-delay-5 mt-[22px] flex flex-col gap-1.5">
-        {project.features.map(feature => (
-          <li
-            key={feature}
-            className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
-          >
-            <span
-              className="mt-[0.6em] h-px w-3 shrink-0 bg-border"
-              aria-hidden="true"
-            />
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
+      {project.details?.map(paragraph => (
+        <p
+          key={paragraph}
+          className="animate-rise animate-delay-4 mt-4 text-pretty text-sm leading-[1.7] text-muted-foreground"
+        >
+          {paragraph}
+        </p>
+      ))}
+
+      {project.features && project.features.length > 0 && (
+        <ul className="animate-rise animate-delay-5 mt-[22px] list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
+          {project.features.map(feature => (
+            <li key={feature}>{feature}</li>
+          ))}
+        </ul>
+      )}
 
       <p
         className="animate-rise animate-delay-6 mt-6 text-pretty font-mono text-[11px] leading-[1.9] tracking-[0.04em] text-muted-foreground"

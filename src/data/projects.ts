@@ -20,11 +20,27 @@ import efrThumbnail from "@/assets/projects/efr/thumbnail.webp";
 import frameitShot01 from "@/assets/projects/frameit/01.webp";
 import frameitShot02 from "@/assets/projects/frameit/02.webp";
 import frameitThumbnail from "@/assets/projects/frameit/thumbnail.webp";
+import mdkShot01 from "@/assets/projects/mdk/01.webp";
+import mdkShot02 from "@/assets/projects/mdk/02.webp";
+import mdkShot03 from "@/assets/projects/mdk/03.webp";
+import mdkShot04 from "@/assets/projects/mdk/04.webp";
+import mdkShot05 from "@/assets/projects/mdk/05.webp";
+import mdkShot06 from "@/assets/projects/mdk/06.webp";
+import mdkThumbnail from "@/assets/projects/mdk/thumbnail.webp";
+import miningosShot01 from "@/assets/projects/miningos/01.webp";
+import miningosShot02 from "@/assets/projects/miningos/02.webp";
+import miningosShot03 from "@/assets/projects/miningos/03.webp";
+import miningosShot04 from "@/assets/projects/miningos/04.webp";
+import miningosThumbnail from "@/assets/projects/miningos/thumbnail.webp";
 import runeShot01 from "@/assets/projects/rune/01.webp";
 import runeShot02 from "@/assets/projects/rune/02.webp";
 import runeShot03 from "@/assets/projects/rune/03.webp";
 import runeShot04 from "@/assets/projects/rune/04.webp";
 import runeThumbnail from "@/assets/projects/rune/thumbnail.webp";
+import t3codeShot01 from "@/assets/projects/t3code/01.webp";
+import t3codeShot02 from "@/assets/projects/t3code/02.webp";
+import t3codeShot03 from "@/assets/projects/t3code/03.webp";
+import t3codeThumbnail from "@/assets/projects/t3code/thumbnail.webp";
 
 export type ProjectImage = {
   src: StaticImageData;
@@ -34,11 +50,20 @@ export type ProjectImage = {
 export type Project = {
   name: string;
   slug: string;
+  /** First paragraph; also the page's meta description. */
   description: string;
+  /** Further paragraphs under the description. */
+  details?: string[];
   tech: string[];
-  features: string[];
+  features?: string[];
   status: "development" | "live" | "archived";
+  /** Open-source work (Tether products, outside contributions) or my own projects. */
+  category: "open-source" | "personal";
+  /** My part in a project I do not own, e.g. "Tether team". */
+  role?: string;
   url?: string;
+  /** Extra links shown next to "source", e.g. a docs site. */
+  links?: { label: string; href: string }[];
   /** 4:3 card art on the project grid. */
   thumbnail?: ProjectImage;
   /** 16:9 shots for the detail page gallery, in display order. */
@@ -47,8 +72,124 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    name: "MDK",
+    slug: "mdk",
+    category: "open-source",
+    role: "Tether team",
+    description:
+      "Tether's open-source Mining Development Kit for building Bitcoin mining software. Workers translate vendor protocols from miners, containers, pools and power meters into one MDK protocol and talk to a kernel peer to peer over Hyperswarm RPC. A gateway, an MCP server and React UI packages sit on top for dashboards and agents.",
+    tech: ["Node.js", "Hyperswarm RPC", "HyperDHT", "MCP", "AI SDK", "React", "TypeScript", "TanStack Query", "Zustand", "Radix UI", "Turborepo"],
+    details: [
+      "I work on the React UI packages and the operations centre views built on them: site overview, container layouts, the explorer, power adjustment and temperature heatmaps. I also work on Operation Center Lite, an app built on MDK.",
+    ],
+    status: "live",
+    url: "https://github.com/tetherto/mdk",
+    links: [
+      { label: "docs", href: "https://docs.mdk.tether.io" },
+    ],
+    thumbnail: {
+      src: mdkThumbnail,
+      alt: "MDK Site Overview with mining containers, per-rack tables and miner status counts",
+    },
+    screenshots: [
+      {
+        src: mdkShot01,
+        alt: "MDK dashboard running the Operation Center Lite app: site hash rate against nominal and power consumption charts with a miners, hashrate, consumption and efficiency strip",
+      },
+      {
+        src: mdkShot02,
+        alt: "MDK Site Overview with one card per mining container showing power draw, efficiency, a per-rack table, miner status counts and power mode controls",
+      },
+      {
+        src: mdkShot03,
+        alt: "MDK container Power Adjustment tab: a grid of rack sockets with all miners selected and a panel to set their power percentage",
+      },
+      {
+        src: mdkShot04,
+        alt: "MDK container Heatmap tab: rack sockets coloured by miner inlet temperature",
+      },
+      {
+        src: mdkShot05,
+        alt: "The MDK docs site home page with getting started cards for the overview, the CLI, a first app and agent skills",
+      },
+      {
+        src: mdkShot06,
+        alt: "An MDK docs tutorial for building a first app with a UI, with the sidebar and the on this page outline",
+      },
+    ],
+  },
+  {
+    name: "MiningOS",
+    slug: "miningos",
+    category: "open-source",
+    role: "Tether team",
+    description:
+      "Tether's open-source operating system for Bitcoin mining sites. Every device runs as a worker built from shared thing and miner templates, keeps its data in Hypercore and Hyperbee, and is reached over Hyperswarm RPC and HyperDHT. A Fastify API gateway and a React dashboard on top monitor and control miners, containers, cooling and power.",
+    tech: ["Node.js", "Hyperswarm RPC", "HyperDHT", "Hyperbee", "Fastify", "SQLite", "React", "TypeScript", "RTK Query", "Ant Design"],
+    details: [
+      "I work mainly on the dashboard: the power adjustment tab for Whatsminer containers, operations reports on the v2 metrics API and typed RTK Query hooks for the finance endpoints, with the occasional fix in the Node.js API gateway.",
+    ],
+    status: "live",
+    url: "https://github.com/tetherto/miningos-app-ui",
+    thumbnail: {
+      src: miningosThumbnail,
+      alt: "MiningOS Site Overview with container cards showing power, cooling readings and miner status counts",
+    },
+    screenshots: [
+      {
+        src: miningosShot01,
+        alt: "MiningOS Site Overview: cards for six mining containers showing power draw, tank temperatures and pressures, pump states and miner status counts",
+      },
+      {
+        src: miningosShot02,
+        alt: "MiningOS container Home tab: miner stats, cooling pump and fan states, pressure and power meter readings, container controls and active alarms",
+      },
+      {
+        src: miningosShot03,
+        alt: "MiningOS container Power Adjustment tab: rack and socket grid with selected miners and a power controls panel with percentage presets",
+      },
+      {
+        src: miningosShot04,
+        alt: "MiningOS operations report with hashrate, power consumption, site efficiency and miners status charts over a week",
+      },
+    ],
+  },
+  {
+    name: "T3 Code",
+    slug: "t3code",
+    category: "open-source",
+    role: "Vouched contributor",
+    description:
+      "A desktop and web app for driving coding agents like Claude Code and Codex from any computer or phone.",
+    tech: ["TypeScript", "Effect", "React", "Electron"],
+    details: [
+      "I am a vouched contributor. My merged work fixed checkpoint diffs that never resolved, kept the diff panel state across threads, fixed closing the diff panel and fixed adding projects in the Linux desktop app.",
+    ],
+    status: "live",
+    url: "https://github.com/pingdotgg/t3code",
+    thumbnail: {
+      src: t3codeThumbnail,
+      alt: "T3 Code sidebar with two threads next to an agent conversation showing a prompt and the commands the agent ran",
+    },
+    screenshots: [
+      {
+        src: t3codeShot01,
+        alt: "T3 Code thread where Claude Sonnet adds a --json flag to a CLI, showing the prompt, the commands it ran and its reply, with the git panel on the right",
+      },
+      {
+        src: t3codeShot02,
+        alt: "T3 Code with the diff panel open next to the conversation, showing the latest turn's changes to src/cli.ts as a line-by-line diff",
+      },
+      {
+        src: t3codeShot03,
+        alt: "T3 Code model picker open over a thread, listing Claude models with reasoning levels from low to max and a tab for Codex models",
+      },
+    ],
+  },
+  {
     name: "rune",
     slug: "rune",
+    category: "personal",
     description:
       "Local-first markdown notes where an AI agent works next to you. Notes stay as plain .md files on disk, and the desktop editor and a local MCP server both read and write the same library.",
     tech: ["TypeScript", "Tauri", "React", "CodeMirror", "MCP", "SQLite", "Bun"],
@@ -87,6 +228,7 @@ export const projects: Project[] = [
   {
     name: "eggfriedrice.nvim",
     slug: "efr.nvim",
+    category: "personal",
     description:
       "A dark, warm Neovim colorscheme: yolk-yellow functions and types, scallion-green strings and rice-cream text on a halcyon navy, with One Dark Pro token roles. The same Lua palette also generates matching themes for 20+ other tools.",
     tech: ["Lua", "Neovim", "Treesitter", "OKLCH", "GitHub Actions"],
@@ -125,6 +267,7 @@ export const projects: Project[] = [
   {
     name: "dotfiles",
     slug: "dotfiles",
+    category: "personal",
     description:
       "Arch Linux and Hyprland dotfiles for three machines, a desktop and two laptops. One script installs a machine from the Arch ISO, DMI-matched profiles hold the per-machine bits, and every app draws from one palette and type scale.",
     tech: ["Hyprland", "Lua", "Bash", "Arch Linux", "Neovim", "Waybar", "Ghostty", "rofi"],
@@ -155,6 +298,7 @@ export const projects: Project[] = [
   {
     name: "frameit",
     slug: "frameit",
+    category: "personal",
     description:
       "Temporary selection rectangle for Wayland. Hold a chord, drag with the mouse, and a translucent box follows the pointer. It is a real layer-shell overlay, so it shows up in Discord, Meet or OBS screen shares, then vanishes on release.",
     tech: ["Rust", "Wayland", "layer-shell", "Hyprland"],
@@ -185,6 +329,7 @@ export const projects: Project[] = [
   {
     name: "Bondid",
     slug: "bondid",
+    category: "personal",
     description:
       "Social app where everyone has a personal AI agent that coordinates with friends' agents on their behalf. Every action goes through a permission model: the owner approves it, and a friend has to grant access before their agent shares anything.",
     tech: ["TypeScript", "Bun", "Hono", "React", "PostgreSQL", "Drizzle ORM", "Expo", "Vercel AI SDK", "Better Auth", "Turborepo"],
@@ -222,6 +367,7 @@ export const projects: Project[] = [
   {
     name: "efr",
     slug: "efr",
+    category: "personal",
     description:
       "A terminal-first AI agent harness that lives in zsh. A line that starts with a comma goes to the agent, a daemon runs the model loop and real hidden shells, and permissions follow the path instead of the project directory.",
     tech: ["Rust", "zsh", "libghostty", "SQLite", "bubblewrap", "Tailscale", "React Native"],
