@@ -144,6 +144,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${mPlusRounded.variable} font-sans antialiased`}>
+        {/* BlurImage reveals images from JS once they load. Without JS, show
+            them as they arrive and drop the blurred previews. */}
+        <noscript>
+          <style>
+            {"img[data-blur-image]{opacity:1!important;filter:none!important;scale:1!important}span[data-blur-image]{display:none}"}
+          </style>
+        </noscript>
         <Providers>
           <div className="mx-auto flex min-h-screen max-w-xl flex-col px-6 pb-24 pt-12">
             <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
