@@ -233,6 +233,53 @@
   animation: page-exit 0.6s cubic-bezier(0.11, 0, 0.5, 0) both;
 }
 
+/* Next scrolls a new route to the top inside the transition, so the old and
+   new `main` sit at different viewport positions and the group would slide
+   the outgoing snapshot from one to the other: a visible "scroll up" before
+   the exit. steps(1, end) holds the old position for the whole exit, so the
+   page sinks away exactly where it was, and only jumps at the end, when the
+   new content is still transparent and waiting on --rise-base. */
+::view-transition-group(page) {
+  animation-duration: 0.6s;
+  animation-timing-function: steps(1, end);
+}
+
+/* The navbar has its own layer. It does not move between routes, so
+   swap old for new at once rather than crossfading: no flicker, and the
+   active tab updates immediately. */
+::view-transition-old(site-nav) {
+  display: none;
+}
+
+::view-transition-new(site-nav) {
+  animation: none;
+}
+
+/* And never slide it: if its position differs (a sticky row on phones that
+   had scrolled), snap rather than animate across the screen. */
+::view-transition-group(site-nav) {
+  animation: none;
+}
+
+/* The masthead stays put the same way. It is the same on every route, so
+   show the new one at once, never slide it. */
+::view-transition-old(masthead) {
+  display: none;
+}
+
+::view-transition-new(masthead),
+::view-transition-group(masthead) {
+  animation: none;
+}
+
+/* Stack the navbar and masthead above the outgoing page. When a scrolled
+   page exits in place, its content would otherwise draw over them; the
+   masthead's own background now hides whatever sinks underneath. */
+::view-transition-group(masthead),
+::view-transition-group(site-nav) {
+  z-index: 1;
+}
+
 /* Left un-animated on purpose. The new view is live and its content starts
    transparent (animate-rise has `both` fill plus the base delay), so the
    outgoing snapshot stays visible underneath while it sinks away. Animating
