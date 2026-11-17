@@ -48,7 +48,8 @@ export const uses: UsesSection[] = [
     items: [
       { label: "Keyboard", name: "Keychron K4" },
       { label: "Keyboard", name: "Anne Pro 2" },
-      { label: "Mouse", name: "Logitech PRO X 2c" },
+      { label: "Keyboard", name: "NuPhy Air60 V2", note: "sits on top of the laptops" },
+      { label: "Mouse", name: "Logitech G PRO X Superlight 2c", note: "in pink" },
       { label: "Speaker", name: "Bang & Olufsen Beosound A1 2nd Gen", note: "over USB, wired sounds better" },
       { label: "Headphones", name: "Sony WH-1000XM5", note: "on LDAC" },
     ],
