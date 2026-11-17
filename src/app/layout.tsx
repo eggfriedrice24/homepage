@@ -5,7 +5,7 @@ import { M_PLUS_Rounded_1c } from "next/font/google";
 import Image from "next/image";
 import { ViewTransition } from "react";
 
-import { FloatingNavbar } from "@/components/floating-navbar";
+import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/providers";
 import { BowlLoader } from "@/components/three/bowl-loader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -129,7 +129,7 @@ export default function RootLayout({
               "sameAs": [
                 "https://github.com/eggfriedrice24",
                 "https://linkedin.com/in/irakli-dzvelaia",
-                "https://twitter.com/IDzvelaia",
+                "https://x.com/IDzvelaia",
               ],
               "knowsAbout": [
                 "TypeScript",
@@ -158,8 +158,23 @@ export default function RootLayout({
           </style>
         </noscript>
         <Providers>
-          <div className="mx-auto flex min-h-screen max-w-xl flex-col px-6 pb-24 pt-12">
-            <header className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+          {/* No top padding below lg: the sticky nav row sits flush at the
+              top from the start, so its resting and stuck positions match. */}
+          <div className="relative mx-auto flex min-h-screen max-w-xl flex-col px-6 pb-12 lg:pt-12">
+            <Navbar />
+
+            {/* Frozen masthead: sticky exactly where it rests (under the 60px
+                nav row on phones, at the top of the page on lg), so it never
+                scrolls away and every navigation keeps it in place. Its page
+                background (reaching up to the top of the column via the
+                negative margin and matching padding) hides content scrolling
+                under it, fading out over the last 24px of its bottom padding:
+                at rest that gap is empty, so the fade only shows once content
+                scrolls through it. A plain CSS gradient, so it blends to
+                transparent without going grey in light mode. Its own
+                view-transition layer sits above the outgoing page (see
+                globals.css). */}
+            <header className="sticky top-[60px] z-10 -mt-6 flex flex-col items-start gap-4 bg-[linear-gradient(to_bottom,var(--background)_calc(100%-24px),transparent)] pb-8 pt-6 [view-transition-name:masthead] sm:flex-row sm:items-center lg:top-0 lg:-mt-12 lg:pt-12">
               <div className="flex items-center gap-4">
                 <Avatar className="size-16">
                   <AvatarImage src="/me.jpg" alt="Ikako" />
@@ -208,8 +223,8 @@ export default function RootLayout({
             </header>
 
             <main>
-              {/* Only the route content transitions; the masthead, footer and
-                  navbar sit outside and stay put across navigations. */}
+              {/* Only the route content transitions; the navbar, masthead and
+                  footer sit outside and stay put across navigations. */}
               <ViewTransition name="page">{children}</ViewTransition>
             </main>
 
@@ -223,7 +238,6 @@ export default function RootLayout({
               </small>
             </footer>
           </div>
-          <FloatingNavbar />
         </Providers>
       </body>
     </html>

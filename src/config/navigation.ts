@@ -9,22 +9,22 @@ export type SocialLink = {
 };
 
 export const TABS: NavTab[] = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
+  { label: "About me", href: "/" },
+  { label: "Work", href: "/projects" },
   { label: "Uses", href: "/uses" },
 ];
 
 export const SOCIALS = [
   {
-    label: "GitHub",
-    href: "https://github.com/eggfriedrice24",
-  },
-  {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/irakli-dzvelaia",
   },
   {
-    label: "Twitter",
-    href: "https://twitter.com/IDzvelaia",
+    label: "GitHub",
+    href: "https://github.com/eggfriedrice24",
+  },
+  {
+    label: "X",
+    href: "https://x.com/IDzvelaia",
   },
 ] as const;
