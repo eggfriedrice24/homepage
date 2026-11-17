@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    // AVIF first: noticeably smaller than WebP for these screenshots, with
+    // WebP as the fallback for browsers that do not accept it.
+    formats: ["image/avif", "image/webp"],
+  },
   experimental: {
     // Enables React's <ViewTransition>, which powers the route exit/enter
     // animations in globals.css. Still experimental and undocumented as of
