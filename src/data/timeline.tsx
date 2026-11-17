@@ -44,4 +44,9 @@ export const timelineEvents: TimelineEvent[] = [
       </>
     ),
   },
+  {
+    year: "2026",
+    content:
+      "Graduated from the University of Essex with honours, BSc in Computer Science. My capstone was t-mesh, a decentralized P2P translation mesh in Go.",
+  },
 ];

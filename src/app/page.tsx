@@ -1,6 +1,6 @@
 import { Heart } from "lucide-react";
+import Link from "next/link";
 
-import { FluxxText } from "@/components/fluxx-text";
 import { Separator } from "@/components/ui/separator";
 
 import { TimelineCarousel } from "./_components/timeline-carousel";
@@ -32,33 +32,47 @@ export default function HomePage() {
         </div>
 
         <p className="text-sm text-muted-foreground">
-          Working full-time at
+          Working full-time on
+          {" "}
+          <span className="font-medium text-foreground">Tether</span>
+          &apos;s mining team, employed through
           {" "}
           <span className="font-medium text-sky-400">Noxtton</span>
-          . On the
-          side, building
+          , a Tether company. I build
           {" "}
-          <span className="font-medium text-foreground">Tally</span>
+          <Link href="/projects/mdk" className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">MDK</Link>
           {" "}
-          under
+          and
           {" "}
-          <FluxxText />
-          , a modern accounting & invoicing platform with AI-powered invoice
-          creation, multi-tenant architecture, and a cross-platform desktop app
-          built with Tauri. Also working on my capstone project
+          <Link href="/projects/miningos" className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">MiningOS</Link>
+          , Tether&apos;s open-source stack for running Bitcoin mining sites,
+          from the peer-to-peer workers that talk to miners to the dashboards
+          operators use every day.
+        </p>
+      </section>
+
+      <section className="animate-rise animate-delay-2 space-y-4" aria-labelledby="open-source-heading">
+        <h2 id="open-source-heading" className="w-fit border-b pb-2 font-semibold">Open source</h2>
+
+        <p className="text-sm text-muted-foreground">
+          I think the software behind real infrastructure should be open, so
+          anyone can run it, read it and fix it. MDK and MiningOS are built in
+          public under the Apache 2.0 licence, and my own projects live on
+          GitHub too. Outside work I contribute to the tools I use every day,
+          like
           {" "}
-          <span className="font-medium text-foreground">t-mesh</span>
-          , a
-          decentralized P2P translation service mesh in Go using libp2p,
-          featuring CLI-based job orchestration and AI-powered worker selection.
-          Final year at University of Essex, graduating 2026.
+          <Link href="/projects/t3code" className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">T3 Code</Link>
+          , where I am a vouched contributor. More on the
+          {" "}
+          <Link href="/projects" className="font-medium text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary">projects page</Link>
+          .
         </p>
       </section>
 
       <TimelineCarousel />
 
       <section
-        className="animate-rise animate-delay-3 space-y-4"
+        className="animate-rise animate-delay-4 space-y-4"
         aria-labelledby="interests-heading"
       >
         <h2
@@ -83,9 +97,9 @@ export default function HomePage() {
         </p>
       </section>
 
-      <Separator className="animate-rise animate-delay-4 my-12" />
+      <Separator className="animate-rise animate-delay-5 my-12" />
 
-      <aside className="animate-rise animate-delay-5 space-y-4">
+      <aside className="animate-rise animate-delay-6 space-y-4">
         <p className="text-sm text-muted-foreground">
           If you like what I do and want to collaborate, feel free to reach out
           via social links in the navigation below.
