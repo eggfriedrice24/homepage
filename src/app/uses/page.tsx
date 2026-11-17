@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Seven stagger steps exist (animate-delay-1..7); later sections share the last.
+// The intro rises first, the section index one step later, then each section
+// a step after that. Seven stagger steps exist; later sections share the last.
 const DELAYS = [
   "animate-delay-1",
   "animate-delay-2",
@@ -25,68 +26,97 @@ const DELAYS = [
   "animate-delay-6",
   "animate-delay-7",
 ];
+const delay = (step: number) => DELAYS[Math.min(step, DELAYS.length) - 1];
+
+function slug(title: string) {
+  return title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-");
+}
+
+const pad = (count: number) => String(count).padStart(2, "0");
 
 export default function UsesPage() {
   return (
-    <div className="space-y-10">
-      <section className="animate-rise space-y-2">
-        <h2 className="text-2xl font-bold tracking-[-0.01em]">Uses</h2>
-        <p className="text-sm text-muted-foreground">
+    <div>
+
+      <section className="animate-rise">
+        <h2 className="mb-2 text-2xl font-bold tracking-[-0.01em]">Uses</h2>
+        <p className="text-pretty text-sm text-muted-foreground">
           {description}
           {" "}
           Everything runs the same eggfriedrice palette.
         </p>
       </section>
 
-      {uses.map((section, index) => (
-        <section
-          key={section.title}
-          className={`animate-rise ${DELAYS[Math.min(index, DELAYS.length - 1)]} space-y-3`}
-          aria-labelledby={`uses-${index}`}
-        >
-          <header className="space-y-1">
-            <h3 id={`uses-${index}`} className="w-fit border-b pb-2 font-semibold">
-              {section.title}
-            </h3>
-            {section.description && (
-              <p className="pt-1 text-sm text-muted-foreground">{section.description}</p>
-            )}
-          </header>
+      <nav
+        aria-label="Sections"
+        className={`animate-rise ${delay(1)} mt-5 flex flex-wrap gap-x-3.5 gap-y-1.5 font-mono text-[11px] tracking-[0.04em]`}
+      >
+        {uses.map(section => (
+          <a
+            key={section.title}
+            href={`#${slug(section.title)}`}
+            className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
+          >
+            {section.title}
+          </a>
+        ))}
+      </nav>
 
-          <dl className="divide-y divide-border/60">
-            {section.items.map(item => (
-              <div
-                key={`${item.label}-${item.name}`}
-                className="grid grid-cols-[6.5rem_1fr] items-baseline gap-x-4 py-2 text-sm"
-              >
-                <dt className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
-                  {item.label}
-                </dt>
-                <dd className="min-w-0">
-                  {item.href
-                    ? (
-                        <Link
-                          href={item.href}
-                          className="font-medium underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
-                        >
-                          {item.name}
-                        </Link>
-                      )
-                    : <span className="font-medium">{item.name}</span>}
-                  {item.note && (
-                    <span className="text-muted-foreground">
-                      {" "}
-                      &middot;
-                      {" "}
-                      {item.note}
-                    </span>
-                  )}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-      ))}
+      <div className="mt-10 flex flex-col gap-11">
+        {uses.map((section, index) => (
+          <section
+            key={section.title}
+            id={slug(section.title)}
+            aria-label={section.title}
+            className={`animate-rise ${delay(index + 2)} scroll-mt-6`}
+          >
+            <header className="flex items-baseline gap-3">
+              <h3 className="text-sm font-semibold">{section.title}</h3>
+              <span className="h-px flex-1 self-center bg-border" aria-hidden="true" />
+              <span className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
+                {pad(section.items.length)}
+              </span>
+            </header>
+
+            {section.description && (
+              <p className="mt-2 text-pretty text-[13px] leading-relaxed text-muted-foreground">
+                {section.description}
+              </p>
+            )}
+
+            <dl className="mt-3.5 flex flex-col gap-3">
+              {section.items.map(item => (
+                <div
+                  key={`${item.label}-${item.name}`}
+                  className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-4"
+                >
+                  <dt className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
+                    {item.label}
+                  </dt>
+                  <dd className="min-w-0">
+                    {item.href
+                      ? (
+                          <Link
+                            href={item.href}
+                            className="inline-flex items-baseline gap-1.5 text-sm font-medium transition-colors duration-150 hover:text-primary"
+                          >
+                            <span>{item.name}</span>
+                            <span aria-hidden="true" className="text-xs text-primary">&rarr;</span>
+                          </Link>
+                        )
+                      : <span className="text-sm font-medium">{item.name}</span>}
+                    {item.note && (
+                      <p className="mt-0.5 text-pretty text-[13px] leading-normal text-muted-foreground">
+                        {item.note}
+                      </p>
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        ))}
+      </div>
     </div>
   );
 }
