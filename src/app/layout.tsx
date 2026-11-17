@@ -90,7 +90,13 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      // Lets Next turn smooth scrolling off while it scrolls a new route to
+      // the top, so only in-page anchor jumps animate.
+      data-scroll-behavior="smooth"
+    >
       <head>
         <link
           rel="apple-touch-icon"

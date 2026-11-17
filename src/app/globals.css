@@ -167,6 +167,13 @@
 }
 
 @layer base {
+  /* Smooth in-page anchor jumps. Next disables it during route changes
+     because <html> carries data-scroll-behavior="smooth". */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
   * {
     @apply border-border outline-ring/50;
   }
