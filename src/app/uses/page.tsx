@@ -37,29 +37,31 @@ const pad = (count: number) => String(count).padStart(2, "0");
 export default function UsesPage() {
   return (
     <div>
-
-      <section className="animate-rise">
-        <h2 className="mb-2 text-2xl font-bold tracking-[-0.01em]">Uses</h2>
+      <header className="animate-rise">
+        <h1 className="sr-only">Uses</h1>
         <p className="text-pretty text-sm text-muted-foreground">
           {description}
           {" "}
           Everything runs the same eggfriedrice palette.
         </p>
-      </section>
+      </header>
 
       <nav
-        aria-label="Sections"
-        className={`animate-rise ${delay(1)} mt-5 flex flex-wrap gap-x-3.5 gap-y-1.5 font-mono text-[11px] tracking-[0.04em]`}
+        aria-label="On this page"
+        className={`animate-rise ${delay(1)} mt-5`}
       >
-        {uses.map(section => (
-          <a
-            key={section.title}
-            href={`#${slug(section.title)}`}
-            className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
-          >
-            {section.title}
-          </a>
-        ))}
+        <ul role="list" className="flex flex-wrap gap-x-3.5 gap-y-1.5 font-mono text-[11px] tracking-[0.04em]">
+          {uses.map(section => (
+            <li key={section.title}>
+              <a
+                href={`#${slug(section.title)}`}
+                className="text-muted-foreground transition-colors duration-150 hover:text-foreground"
+              >
+                {section.title}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
       <div className="mt-10 flex flex-col gap-11">
@@ -67,14 +69,14 @@ export default function UsesPage() {
           <section
             key={section.title}
             id={slug(section.title)}
-            aria-label={section.title}
+            aria-labelledby={`${slug(section.title)}-heading`}
             className={`animate-rise ${delay(index + 2)} scroll-mt-6`}
           >
             <header className="flex items-baseline gap-3">
-              <h3 className="text-sm font-semibold">{section.title}</h3>
-              <span className="h-px flex-1 self-center bg-border" aria-hidden="true" />
+              <h2 id={`${slug(section.title)}-heading`} className="text-sm font-semibold">{section.title}</h2>
               <span className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
                 {pad(section.items.length)}
+                <span className="sr-only"> items</span>
               </span>
             </header>
 

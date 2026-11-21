@@ -35,10 +35,11 @@ export function ProjectThumbnail({
   className,
   children,
 }: ProjectThumbnailProps) {
+  // Spans only (phrasing content), so it can sit inside the gallery's button.
   return (
-    <div
+    <span
       className={cn(
-        "relative overflow-hidden rounded-xl border bg-card",
+        "relative block overflow-hidden rounded-xl border bg-card",
         className,
       )}
     >
@@ -54,16 +55,16 @@ export function ProjectThumbnail({
           )
         : (
             <>
-              <div
-                className="absolute inset-0"
+              <span
+                className="absolute inset-0 block"
                 style={{ backgroundImage: HATCH }}
                 aria-hidden="true"
               />
-              <div className="absolute inset-0 flex items-center justify-center">
+              <span className="absolute inset-0 flex items-center justify-center">
                 <span className="rounded-sm bg-card px-2 py-1 font-mono text-[11px] tracking-wider text-muted-foreground">
                   {label}
                 </span>
-              </div>
+              </span>
             </>
           )}
 
@@ -72,6 +73,6 @@ export function ProjectThumbnail({
       )}
 
       {children}
-    </div>
+    </span>
   );
 }

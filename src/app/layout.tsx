@@ -181,7 +181,8 @@ export default function RootLayout({
                   <AvatarFallback>IK</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h1 className="font-semibold">Ikako Dzvelaia</h1>
+                  {/* Not a heading: each page carries its own h1. */}
+                  <p className="font-semibold">Ikako Dzvelaia</p>
                   <p className="text-sm text-muted-foreground">
                     Software Engineer
                   </p>
@@ -208,8 +209,11 @@ export default function RootLayout({
               </div>
               <Tooltip>
                 <TooltipTrigger asChild>
+                  {/* Focusable so keyboard users get the tooltip too; not a
+                      button, since the bowl is dragged rather than clicked. */}
                   <div
                     role="img"
+                    tabIndex={0}
                     className="cursor-pointer sm:ml-auto"
                     aria-label="eggfriedrice mascot"
                   >
@@ -228,7 +232,12 @@ export default function RootLayout({
               <ViewTransition name="page">{children}</ViewTransition>
             </main>
 
-            <footer className="mt-auto pt-8 text-center">
+            <footer className="mt-auto pt-8 text-center space-y-2">
+              <p className="text-xs text-muted-foreground">
+                If you like what I do and want to collaborate, feel free to reach out
+                via social links.
+              </p>
+
               <small className="text-xs text-muted-foreground">
                 &copy;
                 {" "}

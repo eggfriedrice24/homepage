@@ -51,18 +51,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <article>
-      <Link
-        href="/projects"
-        className="animate-rise inline-flex items-center gap-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-      >
-        <span aria-hidden="true">&larr;</span>
-        <span>Projects</span>
-      </Link>
+      <nav aria-label="Breadcrumb">
+        <Link
+          href="/projects"
+          className="animate-rise inline-flex items-center gap-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <span aria-hidden="true">&larr;</span>
+          <span>Projects</span>
+        </Link>
+      </nav>
 
       <header className="animate-rise animate-delay-1 mb-3.5 mt-5 flex flex-wrap items-baseline gap-2.5">
-        <h2 className="text-base font-semibold tracking-[-0.01em]">
+        <h1 className="text-base font-semibold tracking-[-0.01em]">
           {project.name}
-        </h2>
+        </h1>
         <StatusDot status={project.status} className="size-1.5" />
         <span className="font-mono text-[11px] tracking-[0.04em] text-muted-foreground">
           {statusLabels[project.status]}
@@ -116,12 +118,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </ul>
       )}
 
-      <p
+      {/* Inline items with CSS separators, so it wraps like the old joined
+          string did while reading as a list. */}
+      <ul
+        role="list"
         className="animate-rise animate-delay-6 mt-6 text-pretty font-mono text-[11px] leading-[1.9] tracking-[0.04em] text-muted-foreground"
         aria-label="Technologies used"
       >
-        {project.tech.join("  ·  ")}
-      </p>
+        {project.tech.map(tech => (
+          <li key={tech} className="inline after:content-['_·_'] last:after:content-none">
+            {tech}
+          </li>
+        ))}
+      </ul>
 
       <nav
         className="animate-rise animate-delay-7 mt-10 flex justify-between gap-4 border-t pt-4 text-[13px]"
@@ -132,13 +141,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
         >
           <span aria-hidden="true">&larr;</span>
-          <span>{previous.name}</span>
+          <span>
+            <span className="sr-only">Previous project: </span>
+            {previous.name}
+          </span>
         </Link>
         <Link
           href={`/projects/${next.slug}`}
           className="inline-flex items-center gap-1.5 text-right text-muted-foreground transition-colors hover:text-foreground"
         >
-          <span>{next.name}</span>
+          <span>
+            <span className="sr-only">Next project: </span>
+            {next.name}
+          </span>
           <span aria-hidden="true">&rarr;</span>
         </Link>
       </nav>

@@ -71,8 +71,9 @@ export function Navbar() {
   const activeTab = getActiveTab();
 
   return (
-    <nav
-      aria-label="Main navigation"
+    // The bar itself is a plain container: only the page tabs are navigation;
+    // the socials and theme toggle sit beside them.
+    <div
       className={cn(
         // Phones: the whole sticky row (with its background) is the
         // view-transition layer. On lg the nav is an invisible full-height
@@ -87,36 +88,41 @@ export function Navbar() {
           to. The list sits at the same spot on every page, so it can stay
           put (see globals.css). */}
       <div className="flex items-center gap-1 lg:sticky lg:top-12 lg:mr-6 lg:w-max lg:flex-col lg:items-end lg:gap-6 lg:[view-transition-name:site-nav]">
-        <div className="flex items-center gap-1 lg:flex-col lg:items-end">
-          <AnimatedBackground
-            defaultValue={activeTab}
-            className="rounded-lg bg-muted"
-            transition={{
-              type: "spring",
-              bounce: 0.2,
-              duration: 0.3,
-            }}
-          >
-            {TABS.map((tab) => {
-              const isActive = activeTab === tab.label;
+        <nav aria-label="Main navigation">
+          <ul role="list" className="flex items-center gap-1 lg:flex-col lg:items-end">
+            {/* AnimatedBackground clones each li into `relative inline-flex`
+                with the highlight behind it, so the li takes the box the
+                link used to take, at the same size. */}
+            <AnimatedBackground
+              defaultValue={activeTab}
+              className="rounded-lg bg-muted"
+              transition={{
+                type: "spring",
+                bounce: 0.2,
+                duration: 0.3,
+              }}
+            >
+              {TABS.map((tab) => {
+                const isActive = activeTab === tab.label;
 
-              return (
-                <Link
-                  key={tab.label}
-                  href={tab.href}
-                  data-id={tab.label}
-                  aria-current={isActive ? "page" : undefined}
-                  className={cn(
-                    "inline-flex h-9 items-center px-3 text-sm transition-colors duration-100 hover:text-foreground focus-visible:outline-2",
-                    isActive ? "font-medium text-primary" : "text-muted-foreground",
-                  )}
-                >
-                  {tab.label}
-                </Link>
-              );
-            })}
-          </AnimatedBackground>
-        </div>
+                return (
+                  <li key={tab.label} data-id={tab.label}>
+                    <Link
+                      href={tab.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "inline-flex h-9 items-center px-3 text-sm transition-colors duration-100 hover:text-foreground focus-visible:outline-2",
+                        isActive ? "font-medium text-primary" : "text-muted-foreground",
+                      )}
+                    >
+                      {tab.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </AnimatedBackground>
+          </ul>
+        </nav>
 
         <div className="ml-auto flex items-center gap-1 lg:ml-0 lg:flex-col lg:items-end">
           {/* Socials inline from sm up; phones keep them in a menu so the
@@ -170,6 +176,6 @@ export function Navbar() {
           <ThemeToggle />
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

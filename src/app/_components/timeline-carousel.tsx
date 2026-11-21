@@ -55,7 +55,7 @@ export function TimelineCarousel() {
       aria-labelledby="bio-heading"
     >
       <div className="flex items-center justify-between">
-        <h2 id="bio-heading" className="w-fit border-b pb-2 font-semibold">
+        <h2 id="bio-heading" className="w-fit pb-2 font-semibold">
           Bio
         </h2>
 
@@ -71,7 +71,7 @@ export function TimelineCarousel() {
             >
               <ChevronLeft className="size-4" aria-hidden="true" />
             </Button>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground" aria-live="polite">
               {currentPage + 1}
               {" / "}
               {totalPages}
@@ -97,10 +97,11 @@ export function TimelineCarousel() {
               <div className="relative">
                 <div
                   className="absolute left-16 top-0 h-full w-0.5 bg-border"
-                  role="presentation"
+                  aria-hidden="true"
                 />
 
-                <ol className="relative list-none p-0">
+                {/* role="list": Safari drops list semantics with list-none. */}
+                <ol role="list" className="relative list-none p-0">
                   {pageEvents.map(event => (
                     <li
                       key={event.year}

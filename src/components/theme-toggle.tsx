@@ -2,6 +2,7 @@
 
 import { motion as m } from "motion/react";
 import { useTheme } from "next-themes";
+import { useSyncExternalStore } from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -65,8 +66,19 @@ const sunPath
 const moonPath
   = "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z";
 
+const noopSubscribe = () => () => {};
+
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
+  // The theme is only known on the client: keep the server's generic label
+  // through hydration, then name the action the button will take.
+  const isClient = useSyncExternalStore(noopSubscribe, () => true, () => false);
+
+  const label = !isClient
+    ? "Toggle theme"
+    : theme === "dark"
+      ? "Switch to light theme"
+      : "Switch to dark theme";
 
   return (
     <Button
@@ -74,7 +86,7 @@ export function ThemeToggle() {
       size="icon"
       className="size-9"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle theme"
+      aria-label={label}
     >
       <m.svg
         strokeWidth="4"

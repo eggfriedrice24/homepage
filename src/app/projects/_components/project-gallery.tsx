@@ -90,7 +90,7 @@ export function ProjectGallery({ slug, images = [] }: ProjectGalleryProps) {
               type="button"
               onClick={() => setShot(index)}
               aria-label={`Show ${slug} image ${pad(index)}`}
-              aria-current={index === shot}
+              aria-pressed={index === shot}
               className={cn(
                 "relative aspect-[16/10] overflow-hidden rounded-md border bg-card transition duration-200 hover:opacity-100",
                 index === shot ? "border-primary opacity-100" : "opacity-55",

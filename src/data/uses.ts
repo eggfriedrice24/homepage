@@ -32,14 +32,15 @@ export const uses: UsesSection[] = [
     description: "Same dotfiles, picked up per machine through DMI-matched profiles.",
     items: [
       {
+        label: "Arriving (batch 22)",
+        name: "Framework Laptop 13 Pro",
+        note: "Intel Core Ultra X7 358H, 2880x1920, in December",
+      },
+
+      {
         label: "Always on",
         name: "ThinkPad T14s Gen 1 AMD",
         note: "Ryzen 7 PRO 4750U, a work box over Tailscale",
-      },
-      {
-        label: "Arriving",
-        name: "Framework Laptop 13 Pro",
-        note: "Intel Core Ultra X7 358H, 2880x1920, in December",
       },
     ],
   },
@@ -81,9 +82,11 @@ export const uses: UsesSection[] = [
     title: "Coding agents",
     items: [
       { name: "Claude Code" },
+      { name: "efr", note: "my own, a harness that lives in zsh", href: "/projects/efr" },
+      { name: "T3 Code", note: "probably the only gui app I use, love it." },
       { name: "OpenCode" },
       { name: "Codex CLI" },
-      { name: "efr", note: "my own, a harness that lives in zsh", href: "/projects/efr" },
+
     ],
   },
   {

@@ -18,6 +18,8 @@ type ImageStackProps = {
  * visible, so switching is a crossfade between images that already loaded
  * instead of a fresh request. The hidden ones download at low priority, after
  * whatever the page needs first.
+ *
+ * Renders spans only (phrasing content), so it can sit inside a button.
  */
 export function ImageStack({
   images,
@@ -32,11 +34,11 @@ export function ImageStack({
     const isPreloaded = preload && index === 0;
 
     return (
-      <div
+      <span
         key={image.src.src}
         aria-hidden={!isActive}
         className={cn(
-          "absolute inset-0 transition-opacity duration-300 ease-out motion-reduce:transition-none",
+          "absolute inset-0 block transition-opacity duration-300 ease-out motion-reduce:transition-none",
           isActive ? "opacity-100" : "opacity-0",
         )}
       >
@@ -49,7 +51,7 @@ export function ImageStack({
           fetchPriority={isActive || isPreloaded ? undefined : "low"}
           className={className}
         />
-      </div>
+      </span>
     );
   });
 }

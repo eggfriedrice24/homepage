@@ -35,6 +35,8 @@ export default function ProjectsPage() {
 
   return (
     <div className="space-y-10">
+      <h1 className="sr-only">Projects</h1>
+
       {GROUPS.map((group) => {
         const items = projects.filter(project => project.category === group.category);
         const headerStep = ++step;
@@ -49,35 +51,38 @@ export default function ProjectsPage() {
               {group.title}
             </h2>
 
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-x-5 gap-y-7">
+            <ul role="list" className="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-x-5 gap-y-7">
               {items.map((project) => {
                 const cardStep = ++step;
 
                 return (
-                  <ProjectCardLink
-                    key={project.slug}
-                    href={`/projects/${project.slug}`}
-                    hero={project.screenshots?.[0]?.src}
-                    className="group animate-rise block"
-                    style={rise(cardStep)}
-                  >
-                    <ProjectThumbnail
-                      label={project.slug}
-                      images={project.thumbnail && [project.thumbnail]}
-                      sizes={CARD_SIZES}
-                      // The first row is the largest content on load; the
-                      // rest are lazy and start as they near the viewport.
-                      preload={projects.indexOf(project) < 2}
-                      status={project.status}
-                      className="aspect-[4/3] transition duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[3px] group-hover:border-primary group-hover:shadow-lg"
-                    />
-                    <p className="mt-2.5 truncate text-center text-sm font-medium">
-                      {project.name}
-                    </p>
-                  </ProjectCardLink>
+                  <li key={project.slug}>
+                    <ProjectCardLink
+                      href={`/projects/${project.slug}`}
+                      hero={project.screenshots?.[0]?.src}
+                      className="group animate-rise block"
+                      style={rise(cardStep)}
+                    >
+                      <ProjectThumbnail
+                        label={project.slug}
+                        // Empty alt: the name below already labels the link,
+                        // and the long description would only repeat in it.
+                        images={project.thumbnail && [{ ...project.thumbnail, alt: "" }]}
+                        sizes={CARD_SIZES}
+                        // The first row is the largest content on load; the
+                        // rest are lazy and start as they near the viewport.
+                        preload={projects.indexOf(project) < 2}
+                        status={project.status}
+                        className="aspect-[4/3] transition duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[3px] group-hover:border-primary group-hover:shadow-lg"
+                      />
+                      <h3 className="mt-2.5 truncate text-center text-sm font-medium">
+                        {project.name}
+                      </h3>
+                    </ProjectCardLink>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </section>
         );
       })}
